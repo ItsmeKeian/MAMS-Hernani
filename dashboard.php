@@ -1,15 +1,27 @@
+<?php
+
+    session_start();
+
+
+    if(!isset($_SESSION["user"])){
+
+        header("Location: index.html");
+        exit();
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Municipal Aid Monitoring System - Municipality of Hernani</title>
-    
+    <link href="assets/img/logo.jpg" rel="icon">
     <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- FontAwesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/all.min.css">
     <link rel="stylesheet" href="assets/css/dashboard.css">
     
   
@@ -59,7 +71,7 @@
                     </a>
                 </li>
                 <li class="nav-item mt-auto">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="php/logout.php">
                         <i class="fas fa-sign-out-alt"></i>
                         Logout
                     </a>
@@ -80,14 +92,14 @@
                 <div class="d-flex align-items-center">
                     <div class="dropdown">
                         <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
-                            <img src="https://via.placeholder.com/40x40/1e3a8a/ffffff?text=Admin" class="rounded-circle me-2" width="40" height="40" alt="Admin">
+                            <img src="assets/img/logo.jpg" class="rounded-circle me-2" width="40" height="40" alt="Admin">
                             <span class="d-none d-md-inline fw-semibold">Administrator</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
                             <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                            <li><a class="dropdown-item" href="php/logout.php"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
                         </ul>
                     </div>
                 </div>
@@ -241,3 +253,4 @@
                                 </tbody>
                             </table>
                         </div>
+                        
