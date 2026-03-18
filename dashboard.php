@@ -147,7 +147,7 @@
             <!-- Recent Records & Summary Cards -->
             <div class="row g-4">
                 <!-- Recent Aid Distribution -->
-                <div class="col-xl-8">
+                <div class="col-12">
                     <div class="table-container">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h5 class="mb-0"><i class="fas fa-list me-2 text-gold"></i>Recent Aid Distribution</h5>
