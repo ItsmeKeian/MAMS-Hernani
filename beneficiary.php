@@ -297,18 +297,18 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <!-- ADD BENEFICIARY MODAL -->
 <div class="modal fade" id="addModal">
-<div class="modal-dialog modal-xl modal-dialog-scrollable">
-<div class="modal-content">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
 
-<div class="modal-header">
-<h5>Add Beneficiary</h5>
-<button class="btn-close" data-bs-dismiss="modal"></button>
-</div>
+        <div class="modal-header">
+            <h5>Add Beneficiary</h5>
+            <button class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
 
-<div class="modal-body">
+        <div class="modal-body">
 
 
-<form action="php/save_beneficiary.php" method="POST">
+            <form action="php/save_beneficiary.php" method="POST">
 
                     <!-- ================= LOCATION ================= -->
 
@@ -350,102 +350,99 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     </div>
 
-
                     <hr>
-
-
                     <!-- ================= HEAD ================= -->
 
-                    <h5 class="mb-3 text-primary">
-                                Head of Family
-                                </h5>
+          <h5 class="mb-3 text-primary">
+             Head of Family
+           </h5>
 
-                                <div class="row">
+                 <div class="row">
 
-                                <div class="col-md-3 mb-3">
-                                <label>Last Name</label>
-                                <input type="text" name="last_name" class="form-control">
-                                </div>
+                     <div class="col-md-3 mb-3">
+                        <label>Last Name</label>
+                        <input type="text" name="last_name" class="form-control">
+                     </div>
 
-                                <div class="col-md-3 mb-3">
-                                <label>First Name</label>
-                                <input type="text" name="first_name" class="form-control">
-                                </div>
+                     <div class="col-md-3 mb-3">
+                        <label>First Name</label>
+                        <input type="text" name="first_name" class="form-control">
+                    </div>
 
-                                <div class="col-md-3 mb-3">
-                                <label>Middle Name</label>
-                                <input type="text" name="middle_name" class="form-control">
-                                </div>
+                    <div class="col-md-3 mb-3">
+                        <label>Middle Name</label>
+                        <input type="text" name="middle_name" class="form-control">
+                    </div>
 
-                                <div class="col-md-3 mb-3">
-                                <label>Name Extension</label>
-                                <input type="text" name="name_ext" class="form-control">
-                                </div>
+                    <div class="col-md-3 mb-3">
+                        <label>Name Extension</label>
+                        <input type="text" name="name_ext" class="form-control">
+                    </div>
 
-                                <div class="col-md-3 mb-3">
-                                <label>Birthdate</label>
-                                <input type="date" name="birthdate" class="form-control">
-                                </div>
+                    <div class="col-md-3 mb-3">
+                        <label>Birthdate</label>
+                         <input type="date" name="birthdate" class="form-control">
+                    </div>
 
-                                <div class="col-md-2 mb-3">
-                                <label>Age</label>
-                                <input type="number" name="age" class="form-control">
-                                </div>
+                    <div class="col-md-2 mb-3">
+                        <label>Age</label>
+                        <input type="number" name="age" class="form-control">
+                    </div>
 
-                                <div class="col-md-3 mb-3">
-                                <label>Place of Birth</label>
-                                <input type="text" name="place_of_birth" class="form-control">
-                                </div>
+                    <div class="col-md-3 mb-3">
+                        <label>Place of Birth</label>
+                        <input type="text" name="place_of_birth" class="form-control">
+                    </div>
 
-                                <div class="col-md-2 mb-3">
-                                <label>Sex</label>
-                                <select name="sex" class="form-select">
+                    <div class="col-md-2 mb-3">
+                        <label>Sex</label>
+                            <select name="sex" class="form-select">
                                 <option>Male</option>
                                 <option>Female</option>
-                                </select>
-                                </div>
+                            </select>
+                     </div>
 
-                                <div class="col-md-3 mb-3">
-                                <label>Civil Status</label>
-                                <input type="text" name="civil_status" class="form-control">
-                                </div>
+                    <div class="col-md-3 mb-3">
+                        <label>Civil Status</label>
+                        <input type="text" name="civil_status" class="form-control">
+                    </div>
 
-                                <div class="col-md-3 mb-3">
-                                <label>Mother's Maiden Name</label>
-                                <input type="text" name="mothers_maiden_name" class="form-control">
-                                </div>
+                     <div class="col-md-3 mb-3">
+                        <label>Mother's Maiden Name</label>
+                        <input type="text" name="mothers_maiden_name" class="form-control">
+                    </div>
 
-                                <div class="col-md-3 mb-3">
-                                <label>Religion</label>
-                                <input type="text" name="religion" class="form-control">
-                                </div>
+                     <div class="col-md-3 mb-3">
+                        <label>Religion</label>
+                        <input type="text" name="religion" class="form-control">
+                    </div>
 
-                                <div class="col-md-3 mb-3">
-                                <label>Occupation</label>
-                                <input type="text" name="occupation" class="form-control">
-                                </div>
+                    <div class="col-md-3 mb-3">
+                        <label>Occupation</label>
+                        <input type="text" name="occupation" class="form-control">
+                    </div>
 
-                                <div class="col-md-3 mb-3">
-                                <label>Monthly Income</label>
-                                <input type="number" name="monthly_income" class="form-control">
-                                </div>
+                    <div class="col-md-3 mb-3">
+                        <label>Monthly Income</label>
+                        <input type="number" name="monthly_income" class="form-control">
+                     </div>
 
-                                <div class="col-md-3 mb-3">
-                                <label>ID Card Presented</label>
-                                <input type="text" name="id_card_presented" class="form-control">
-                                </div>
+                    <div class="col-md-3 mb-3">
+                        <label>ID Card Presented</label>
+                        <input type="text" name="id_card_presented" class="form-control">
+                    </div>
 
-                                <div class="col-md-3 mb-3">
-                                <label>ID Number</label>
-                                <input type="text" name="id_number" class="form-control">
-                                </div>
+                    <div class="col-md-3 mb-3">
+                        <label>ID Number</label>
+                        <input type="text" name="id_number" class="form-control">
+                    </div>
 
-                                <div class="col-md-3 mb-3">
-                                <label>Contact Number</label>
-                                <input type="text" name="contact_number" class="form-control">
-                                </div>
+                     <div class="col-md-3 mb-3">
+                        <label>Contact Number</label>
+                        <input type="text" name="contact_number" class="form-control">
+                     </div>
 
-                                </div>
+             </div>
 
 
                     <hr>
@@ -453,71 +450,71 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     <!-- ================= ADDRESS ================= -->
 
-                    <h5 class="mb-3 text-primary">
-                    Address
-                    </h5>
+            <h5 class="mb-3 text-primary">
+                Address
+            </h5>
 
-                    <div class="row">
+                <div class="row">
 
-                        <div class="col-md-2 mb-3">
+                    <div class="col-md-2 mb-3">
                         <label>House No</label>
                         <input type="text" name="house_no" class="form-control">
-                        </div>
+                    </div>
 
-                        <div class="col-md-2 mb-3">
-                            <label>Street</label>
-                                 <input type="text" name="street" class="form-control">
-                            </div>
+                    <div class="col-md-2 mb-3">
+                        <label>Street</label>
+                        <input type="text" name="street" class="form-control">
+                    </div>
 
-                        <div class="col-md-2 mb-3">
-                            <label>Sitio</label>
-                                 <input type="text" name="sitio" class="form-control">
-                            </div>
+                    <div class="col-md-2 mb-3">
+                        <label>Sitio</label>
+                        <input type="text" name="sitio" class="form-control">
+                    </div>
 
-                        <div class="col-md-2 mb-3">
+                    <div class="col-md-2 mb-3">
                         <label>Barangay</label>
                         <input type="text" name="addr_barangay" class="form-control">
-                        </div>
+                    </div>
 
-                        <div class="col-md-2 mb-3">
+                    <div class="col-md-2 mb-3">
                         <label>City</label>
                         <input type="text" name="addr_city" class="form-control">
-                        </div>
+                    </div>
 
-                        <div class="col-md-2 mb-3">
+                    <div class="col-md-2 mb-3">
                         <label>Province</label>
                         <input type="text" name="addr_province" class="form-control">
-                        </div>
+                    </div>
 
-                        <div class="col-md-2 mb-3">
+                    <div class="col-md-2 mb-3">
                         <label>Zip Code</label>
                         <input type="text" name="zip_code" class="form-control">
-                        </div>
-
                     </div>
+
+            </div>
 
 
                     <hr>
 
-                        <h5 class="mb-3 text-primary">
-                        Others
-                        </h5>
+            <h5 class="mb-3 text-primary">
+              Others
+            </h5>
 
-                        <div class="row">
+                 <div class="row">
 
-                        <div class="col-md-3 mb-3">
+                    <div class="col-md-3 mb-3">
                         <label>
                         <input type="checkbox" name="is_4ps" value="1">
                         4Ps Beneficiary
                         </label>
-                        </div>
+                    </div>
 
-                        <div class="col-md-3 mb-3">
+                    <div class="col-md-3 mb-3">
                         <label>IP Type</label>
                         <input type="text" name="ip_type" class="form-control">
-                        </div>
+                    </div>
 
-                        </div>
+                </div>
 
                     <hr>
 
@@ -577,33 +574,33 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     <div class="row">
 
+                        <div class="col-md-6">
+
+                            <label>Ownership</label><br>
+
+                            <input type="radio" name="ownership" value="owner"> Owner
+                            <input type="radio" name="ownership" value="renter"> Renter
+                            <input type="radio" name="ownership" value="sharer"> Sharer
+
+                        </div>
+
                     <div class="col-md-6">
 
-                    <label>Ownership</label><br>
+                            <label>Damage</label><br>
 
-                    <input type="radio" name="ownership" value="owner"> Owner
-                    <input type="radio" name="ownership" value="renter"> Renter
-                    <input type="radio" name="ownership" value="sharer"> Sharer
-
-                    </div>
-
-                    <div class="col-md-6">
-
-                    <label>Damage</label><br>
-
-                    <input type="radio" name="damage" value="partial"> Partially Damaged
-                    <input type="radio" name="damage" value="total"> Totally Damaged
+                            <input type="radio" name="damage" value="partial"> Partially Damaged
+                            <input type="radio" name="damage" value="total"> Totally Damaged
 
                     </div>
 
-                    </div>
+                </div>
 
 
                     <hr>
 
                     <div class="col-md-3 mb-3">
-                    <label>Date Registered</label>
-                    <input type="date" name="date_registered" class="form-control">
+                        <label>Date Registered</label>
+                        <input type="date" name="date_registered" class="form-control">
                     </div>
 
 
@@ -622,10 +619,10 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </form>
 
 
-</div>
+            </div>
 
-</div>
-</div>
+        </div>
+    </div>
 </div>
  
 
