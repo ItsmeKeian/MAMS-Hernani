@@ -164,122 +164,40 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <div class="table-responsive">
 
-            <table class="table mb-0">
+        <table id="beneficiaryTable" class="table">
 
                 <thead>
 
-                    <tr>
-
-                        <th>Beneficiary</th>
-                        <th>Permanent Address</th>
-                        <th>Age</th>
-                        <th>Contact No.</th>
-                        <th>Occupation</th>
-                        <th>House ownership</th>
-                        <th>Shelter damage</th>
-                        <th>Date Registered</th>
-                        <th>Action</th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody>
-
-                    <?php foreach ($beneficiaries as $b): ?>
-
                         <tr>
 
-                            <!-- NAME -->
-                            <td>
-
-                                <?= 
-                                    $b["last_name"] . ", " .
-                                    $b["first_name"] . " " .
-                                    $b["middle_name"]
-                                ?>
-
-                            </td>
-
-
-                            <!-- ADDRESS -->
-                            <td>
-
-                                <?= $b["house_no"] ?> 
-                                <?= $b["street"] ?>,
-                                <?= $b["addr_barangay"] ?>,
-                                <?= $b["addr_city"] ?>
-
-                            </td>
-
-
-                            <!-- AGE -->
-                            <td>
-                                <?= $b["age"] ?>
-                            </td>
-
-
-                            <!-- CONTACT -->
-                            <td>
-                                <?= $b["contact_number"] ?>
-                            </td>
-
-
-                            <!-- OCCUPATION -->
-                            <td>
-                                <?= $b["occupation"] ?>
-                            </td>
-
-
-                            <!-- OWNERSHIP -->
-                            <td>
-                                <?= $b["ownership"] ?>
-                            </td>
-
-
-                            <!-- DAMAGE -->
-                            <td>
-                                <?= $b["damage_classification"] ?>
-                            </td>
-
-
-                            <!-- DATE -->
-                            <td>
-                                <?= $b["date_registered"] ?>
-                            </td>
-
-
-                            <!-- ACTION -->
-                            <td>
-
-                                <a 
-                                    href="view_beneficiary.php?id=<?= $b["id"] ?>"
-                                    class="btn btn-sm btn-info"
-                                >
-                                    <i class="fas fa-eye"></i>
-                                </a>
-
-
-                                <button class="btn btn-sm btn-warning">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-
-
-                                <button class="btn btn-sm btn-danger">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-
-                            </td>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Age</th>
+                                <th>Contact</th>
+                                <th>Occupation</th>
+                                <th>Ownership</th>
+                                <th>Damage</th>
+                                <th>Date</th>
+                                <th>Action</th>
 
                         </tr>
 
-                    <?php endforeach; ?>
+                </thead>
 
+            <tbody>
 
-                </tbody>
+            </tbody>
 
             </table>
+
+
+            <div class="d-flex justify-content-between mt-2">
+
+        <div id="recordCount"></div>
+
+        </div>
+
+        <ul class="pagination justify-content-center"></ul>
 
         </div>
 
@@ -308,7 +226,7 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="modal-body">
 
 
-            <form action="php/save_beneficiary.php" method="POST">
+            <form id="beneficiaryForm">
 
                     <!-- ================= LOCATION ================= -->
 
@@ -384,7 +302,7 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
                          <input type="date" name="birthdate" class="form-control">
                     </div>
 
-                    <div class="col-md-2 mb-3">
+                    <div class="col-md-3 mb-3">
                         <label>Age</label>
                         <input type="number" name="age" class="form-control">
                     </div>
@@ -394,7 +312,7 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <input type="text" name="place_of_birth" class="form-control">
                     </div>
 
-                    <div class="col-md-2 mb-3">
+                    <div class="col-md-3 mb-3">
                         <label>Sex</label>
                             <select name="sex" class="form-select">
                                 <option>Male</option>
@@ -451,42 +369,42 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <!-- ================= ADDRESS ================= -->
 
             <h5 class="mb-3 text-primary">
-                Address
+                Permanent Address
             </h5>
 
                 <div class="row">
 
-                    <div class="col-md-2 mb-3">
+                    <div class="col-md-3 mb-3">
                         <label>House No</label>
                         <input type="text" name="house_no" class="form-control">
                     </div>
 
-                    <div class="col-md-2 mb-3">
+                    <div class="col-md-3 mb-3">
                         <label>Street</label>
                         <input type="text" name="street" class="form-control">
                     </div>
 
-                    <div class="col-md-2 mb-3">
+                    <div class="col-md-3 mb-3">
                         <label>Sitio</label>
                         <input type="text" name="sitio" class="form-control">
                     </div>
 
-                    <div class="col-md-2 mb-3">
+                    <div class="col-md-3 mb-3">
                         <label>Barangay</label>
                         <input type="text" name="addr_barangay" class="form-control">
                     </div>
 
-                    <div class="col-md-2 mb-3">
+                    <div class="col-md-4 mb-3">
                         <label>City</label>
                         <input type="text" name="addr_city" class="form-control">
                     </div>
 
-                    <div class="col-md-2 mb-3">
+                    <div class="col-md-4 mb-3">
                         <label>Province</label>
                         <input type="text" name="addr_province" class="form-control">
                     </div>
 
-                    <div class="col-md-2 mb-3">
+                    <div class="col-md-4 mb-3">
                         <label>Zip Code</label>
                         <input type="text" name="zip_code" class="form-control">
                     </div>
@@ -541,22 +459,22 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     <div class="row">
 
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-6 mb-3">
                             <label>Bank / E-wallet</label>
                             <input type="text" name="bank" class="form-control">
                         </div>
 
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-6 mb-3">
                             <label>Account Name</label>
                             <input type="text" name="account_name" class="form-control">
                         </div>
 
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-6 mb-3">
                             <label>Account Type</label>
                             <input type="text" name="account_type" class="form-control">
                         </div>
 
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-6 mb-3">
                             <label>Account Number</label>
                             <input type="text" name="account_number" class="form-control">
                         </div>
@@ -598,7 +516,7 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     <hr>
 
-                    <div class="col-md-3 mb-3">
+                    <div class="col-md-12 mb-3">
                         <label>Date Registered</label>
                         <input type="date" name="date_registered" class="form-control">
                     </div>
@@ -606,7 +524,7 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     <div class="mt-3">
 
-                        <button class="btn btn-success">
+                        <button type="button" id="saveBeneficiary" class="btn btn-success">
                             Save Beneficiary
                         </button>
 
@@ -628,7 +546,10 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 
+<script src="assets/js/jquery-4.0.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="js/beneficiary.js"></script>
 
 </body>
 </html>
