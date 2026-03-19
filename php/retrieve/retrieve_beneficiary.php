@@ -3,40 +3,87 @@
 require "../dbconnect.php";
 
 $page = $_POST["page"] ?? 1;
-$limit = $_POST["limit"] ?? 10;
+$limit = $_POST["limit"] ?? 5;
 $search = $_POST["search"] ?? "";
+$barangay = $_POST["barangay"] ?? "";
 
 $start = ($page - 1) * $limit;
 
-$where = "";
+
+// =====================
+// BUILD WHERE
+// =====================
+
+$where = [];
+$params = [];
+
 
 if ($search != "") {
 
-    $where = "WHERE last_name LIKE :search
-              OR first_name LIKE :search";
+    $where[] = "(last_name LIKE :search OR first_name LIKE :search)";
+    $params["search"] = "%$search%";
 
 }
 
-$totalSql = "SELECT COUNT(*) FROM beneficiaries $where";
+if ($barangay != "") {
+
+    $where[] = "addr_barangay = :barangay";
+    $params["barangay"] = $barangay;
+
+}
+
+
+$whereSql = "";
+
+if (count($where) > 0) {
+
+    $whereSql = "WHERE " . implode(" AND ", $where);
+
+}
+
+
+// =====================
+// COUNT
+// =====================
+
+$totalSql = "SELECT COUNT(*) FROM beneficiaries $whereSql";
+
 $totalStmt = $conn->prepare($totalSql);
 
-if ($search != "") {
-    $totalStmt->bindValue(":search", "%$search%");
+foreach ($params as $key => $val) {
+
+    $totalStmt->bindValue(":$key", $val);
+
 }
 
 $totalStmt->execute();
+
 $total = $totalStmt->fetchColumn();
 
 
-$sql = "SELECT * FROM beneficiaries
-        $where
-        ORDER BY id DESC
-        LIMIT $start,$limit";
+// =====================
+// GET DATA
+// =====================
+
+$sql = "
+
+SELECT *
+FROM beneficiaries
+
+$whereSql
+
+ORDER BY id DESC
+
+LIMIT $start, $limit
+
+";
 
 $stmt = $conn->prepare($sql);
 
-if ($search != "") {
-    $stmt->bindValue(":search", "%$search%");
+foreach ($params as $key => $val) {
+
+    $stmt->bindValue(":$key", $val);
+
 }
 
 $stmt->execute();
@@ -44,8 +91,14 @@ $stmt->execute();
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
+// =====================
+// RESPONSE
+// =====================
+
 echo json_encode([
+
     "status" => 1,
     "data" => $data,
     "total" => $total
+
 ]);

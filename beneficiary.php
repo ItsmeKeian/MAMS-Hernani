@@ -131,13 +131,20 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 <div class="d-flex gap-2">
 
-                    <input type="text" class="form-control" placeholder="Search name...">
+                <input
+                        id="searchInput"
+                        type="text"
+                        class="form-control"
+                        placeholder="Search name...">
 
-                    <select class="form-select">
-                        <option>All Barangay</option>
-                        <option>Barangay 1</option>
-                        <option>Barangay 2</option>
-                    </select>
+                        <select id="filterBarangay" class="form-select">
+
+                            <option value="">All Barangay</option>
+                            <option value="nagaja">Nagaja</option>
+                            <option value="padang">Padang</option>
+                            <option value="poblacion">Poblacion</option>
+
+                         </select>
 
                 </div>
 
@@ -440,15 +447,45 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <!-- ================= FAMILY MEMBERS ================= -->
 
                     <h5 class="mb-3 text-primary">
-                        Family Members
-                    </h5>
+                        Family Information
+                        </h5>
 
-                    <p class="text-muted">
-                    Family members will be added after saving beneficiary.
-                    </p>
+                        <table class="table table-bordered" id="familyTable">
 
+                        <thead>
 
-                    <hr>
+                        <tr>
+
+                        <th>Family Member</th>
+                        <th>Relation</th>
+                        <th>Birthdate</th>
+                        <th>Age</th>
+                        <th>Sex</th>
+                        <th>Education</th>
+                        <th>Occupation</th>
+                        <th>Vulnerability</th>
+                        <th></th>
+
+                        </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                        </tbody>
+
+                        </table>
+
+                        <button
+                        type="button"
+                        class="btn btn-sm btn-primary"
+                        id="addFamilyRow">
+
+                        Add Member
+
+                        </button>
+
+                        <hr>
 
 
                     <!-- ================= ACCOUNT ================= -->

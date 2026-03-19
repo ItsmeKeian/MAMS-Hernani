@@ -1,4 +1,8 @@
-$("#saveBeneficiary").click(function(){
+// =============================
+// SAVE
+// =============================
+
+$("#saveBeneficiary").click(function () {
 
     let formData = $("#beneficiaryForm").serialize();
 
@@ -9,20 +13,18 @@ $("#saveBeneficiary").click(function(){
         data: formData,
         dataType: "json",
 
-        success: function(res){
+        success: function (res) {
 
-            console.log(res);
-
-            if(res.status == 1){
+            if (res.status == 1) {
 
                 Swal.fire({
                     icon: "success",
-                    title: "Saved!",
+                    title: "Saved",
                     timer: 1200,
                     showConfirmButton: false
                 }).then(() => {
 
-                    window.location.href = "beneficiary.php";
+                    location.reload();
 
                 });
 
@@ -36,242 +38,407 @@ $("#saveBeneficiary").click(function(){
 
 
 
+
+
+$("#addFamilyRow").click(function(){
+
+    $("#familyTable tbody").append(`
+
+<tr>
+
+<td>
+<input type="text" name="fm_name[]" class="form-control">
+</td>
+
+<td>
+<input type="text" name="fm_relation[]" class="form-control">
+</td>
+
+<td>
+<input type="date" name="fm_birthdate[]" class="form-control">
+</td>
+
+<td>
+<input type="number" name="fm_age[]" class="form-control">
+</td>
+
+<td>
+<select name="fm_sex[]" class="form-control">
+<option>Male</option>
+<option>Female</option>
+</select>
+</td>
+
+<td>
+<input type="text" name="fm_education[]" class="form-control">
+</td>
+
+<td>
+<input type="text" name="fm_occupation[]" class="form-control">
+</td>
+
+<td>
+<input type="text" name="fm_vulnerability[]" class="form-control">
+</td>
+
+<td>
+
+<button
+type="button"
+class="btn btn-danger removeRow">
+
+X
+
+</button>
+
+</td>
+
+</tr>
+
+`);
+
+});
+
+
+$(document).on("click", ".removeRow", function(){
+
+    $(this).closest("tr").remove();
+
+});
+
+
+// =============================
+// View
+// =============================
+
+$(document).on("click", ".view", function () {
+
+    let id = $(this).data("id");
+
+    window.location.href = "view_beneficiary.php?id=" + id;
+
+});
+
+// =============================
+// DELETE
+// =============================
+
+$(document).on("click", ".delete", function () {
+
+    let id = $(this).data("id");
+
+    Swal.fire({
+        title: "Delete?",
+        icon: "warning",
+        showCancelButton: true
+    }).then((r) => {
+
+        if (!r.isConfirmed) return;
+
+        $.post(
+            "php/delete/delete_beneficiary.php",
+            { id: id },
+            function (res) {
+
+                if (res.status == 1) {
+
+                    Swal.fire({
+                        title: "Deleting...",
+                        timer: 1200,
+                        didOpen: () => Swal.showLoading()
+                    });
+
+                    setTimeout(() => {
+
+                        loadBeneficiary(currentPage);
+
+                    }, 1200);
+
+                }
+
+            },
+            "json"
+        );
+
+    });
+
+});
+
+
+// =============================
+// TABLE + PAGINATION
+// =============================
+
+let currentPage = 1;
+let limit = 5;
+let maxVisible = 3;
+
+
 $(function () {
 
-    let currentPage = 1;
-    let limit = 5;
-    let maxVisible = 3;
+    loadBeneficiary(1);
 
-    loadBeneficiary(currentPage);
+});
 
 
 
-    function loadBeneficiary(page = 1, search = "") {
+function loadBeneficiary(page = 1, search = "", barangay = "") {
 
-        currentPage = page;
+    currentPage = page;
 
-        $.ajax({
+    $.ajax({
 
-            type: "POST",
-            url: "php/retrieve/retrieve_beneficiary.php",
+        type: "POST",
 
-            data: {
-                page: page,
-                limit: limit,
-                search: search
-            },
+        url: "php/retrieve/retrieve_beneficiary.php",
 
-            dataType: "json",
+        data: {
+            page: page,
+            limit: limit,
+            search: search,
+            barangay: barangay
+        },
 
-            success: function (res) {
+        dataType: "json",
 
-                let tbody = $("#beneficiaryTable tbody");
+        success: function (res) {
 
-                tbody.empty();
+            let tbody = $("#beneficiaryTable tbody");
 
-                if (!res.data || res.data.length === 0) {
+            tbody.empty();
 
-                    tbody.append(
-                        "<tr><td colspan='9'>No records</td></tr>"
-                    );
+            if (!res.data || res.data.length == 0) {
 
-                    return;
-                }
-
-
-                // =========================
-                // TABLE ROWS
-                // =========================
-
-                $.each(res.data, function (i, b) {
-
-                    let f = b.last_name ? b.last_name.charAt(0) : "";
-                    let l = b.first_name ? b.first_name.charAt(0) : "";
-
-                    let initials = f + l;
-
-
-                    tbody.append(`
-
-                        <tr>
-
-                        <td>
-
-                            <div class="d-flex align-items-center">
-
-                                <div
-                                class="avatar bg-primary text-white rounded-circle
-                                d-flex align-items-center justify-content-center me-2"
-                                style="width:36px;height:36px;font-size:0.85rem;">
-
-                                    ${initials}
-
-                                </div>
-
-                                <div>
-
-                                    <div class="fw-semibold">
-                                        ${b.last_name} ${b.first_name}
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </td>
-
-                        <td>
-                        ${b.house_no} ${b.street} ${b.addr_barangay}
-                        </td>
-
-                        <td>${b.age}</td>
-
-                        <td>${b.contact_number}</td>
-
-                        <td>${b.occupation}</td>
-
-                        <td>${b.ownership ?? ""}</td>
-
-                        <td>${b.damage_classification ?? ""}</td>
-
-                        <td>${b.date_registered}</td>
-
-                        <td>
-
-                            <button
-                            class="btn btn-sm btn-info view"
-                            data-id="${b.id}">
-                            View
-                            </button>
-
-                        </td>
-
-                        </tr>
-
-                    `);
-
-                });
-
-
-
-                // =========================
-                // RECORD COUNT
-                // =========================
-
-                let start = (page - 1) * limit + 1;
-                let end = start + res.data.length - 1;
-
-                $("#recordCount").text(
-                    `Showing ${start} - ${end} of ${res.total}`
+                tbody.append(
+                    "<tr><td colspan='9'>No records</td></tr>"
                 );
 
+                return;
+            }
 
 
-                // =========================
-                // PAGINATION SLIDING
-                // =========================
+            // ====================
+            // ROWS
+            // ====================
 
-                let totalPages = Math.ceil(res.total / limit);
+            $.each(res.data, function (i, b) {
 
-                let pagination = $(".pagination");
+                let f = b.last_name?.charAt(0) || "";
+                let l = b.first_name?.charAt(0) || "";
 
-                pagination.empty();
+                let initials = f + l;
+
+                tbody.append(`
+
+<tr>
+
+<td>
+
+<div class="d-flex align-items-center">
+
+<div class="avatar bg-primary text-white rounded-circle
+d-flex align-items-center justify-content-center me-2"
+style="width:36px;height:36px;font-size:0.85rem;">
+
+${initials}
+
+</div>
+
+<div>
+
+<div class="fw-semibold">
+
+${b.last_name} ${b.first_name}
+
+</div>
+
+</div>
+
+</div>
+
+</td>
+
+<td>
+${b.house_no} ${b.addr_barangay}
+</td>
+
+<td>${b.age}</td>
+
+<td>${b.contact_number}</td>
+
+<td>${b.occupation}</td>
+
+<td>${b.ownership}</td>
+
+<td>${b.damage_classification}</td>
+
+<td>${b.date_registered}</td>
+
+<td>
+
+<button class="btn btn-sm btn-info view" data-id="${b.id}">
+<i class="fas fa-eye"></i>
+</button>
+
+<button class="btn btn-sm btn-warning edit" data-id="${b.id}">
+<i class="fas fa-edit"></i>
+</button>
+
+<button class="btn btn-sm btn-danger delete" data-id="${b.id}">
+<i class="fas fa-trash"></i>
+</button>
+
+</td>
+
+</tr>
+
+`);
+
+            });
 
 
-                // PREV
+            // ====================
+            // COUNT
+            // ====================
+
+            let start = (page - 1) * limit + 1;
+            let end = start + res.data.length - 1;
+
+            $("#recordCount").text(
+                `Showing ${start} - ${end} of ${res.total}`
+            );
+
+
+            // ====================
+            // PAGINATION SLIDING
+            // ====================
+
+            let totalPages = Math.ceil(res.total / limit);
+
+            let pagination = $(".pagination");
+
+            pagination.empty();
+
+
+            // PREV
+
+            pagination.append(`
+
+            <li class="page-item ${page <= 1 ? "disabled" : ""}">
+
+                <a class="page-link"
+                    href="#"
+                    data-page="${page - 1}">
+
+                    Prev
+
+                </a>
+
+            </li>
+
+            `);
+
+
+            let startPage = Math.max(1, page - 1);
+            let endPage = startPage + maxVisible - 1;
+
+            if (endPage > totalPages) {
+
+                endPage = totalPages;
+                startPage = Math.max(1, endPage - maxVisible + 1);
+
+            }
+
+
+            for (let i = startPage; i <= endPage; i++) {
 
                 pagination.append(`
 
-                    <li class="page-item ${page <= 1 ? "disabled" : ""}">
+                <li class="page-item ${i == page ? "active" : ""}">
 
-                        <a class="page-link"
+                    <a class="page-link"
                         href="#"
-                        data-page="${page - 1}">
+                        data-page="${i}">
 
-                        Prev
+                        ${i}
 
-                        </a>
+                    </a>
 
-                    </li>
-
-                `);
-
-
-                // window pages
-
-                let startPage = Math.max(1, page - 1);
-                let endPage = startPage + maxVisible - 1;
-
-                if (endPage > totalPages) {
-
-                    endPage = totalPages;
-                    startPage = Math.max(1, endPage - maxVisible + 1);
-
-                }
-
-
-                for (let i = startPage; i <= endPage; i++) {
-
-                    pagination.append(`
-
-                        <li class="page-item ${i == page ? "active" : ""}">
-
-                            <a class="page-link"
-                            href="#"
-                            data-page="${i}">
-
-                            ${i}
-
-                            </a>
-
-                        </li>
-
-                    `);
-
-                }
-
-
-                // NEXT
-
-                pagination.append(`
-
-                    <li class="page-item ${page >= totalPages ? "disabled" : ""}">
-
-                        <a class="page-link"
-                        href="#"
-                        data-page="${page + 1}">
-
-                        Next
-
-                        </a>
-
-                    </li>
+                </li>
 
                 `);
 
             }
 
-        });
 
-    }
+            // NEXT
 
+            pagination.append(`
 
+                <li class="page-item ${page >= totalPages ? "disabled" : ""}">
 
-    // =========================
-    // CLICK PAGINATION
-    // =========================
+                    <a class="page-link"
+                        href="#"
+                        data-page="${page + 1}">
 
-    $(document).on("click", ".page-link", function (e) {
+                        Next
 
-        e.preventDefault();
+                    </a>
 
-        let page = $(this).data("page");
+                </li>
 
-        if (!page) return;
+            `);
 
-        loadBeneficiary(page);
+        }
 
     });
 
+}
+
+
+// =============================
+// CLICK PAGINATION
+// =============================
+
+$(document).on("click", ".page-link", function (e) {
+
+    e.preventDefault();
+
+    let page = $(this).data("page");
+
+    if (!page) return;
+
+    let search = $("#searchInput").val();
+    let barangay = $("#filterBarangay").val();
+
+    loadBeneficiary(page, search, barangay);
+
+});
+
+
+// =============================
+// SEARCH
+// =============================
+
+$("#searchInput").on("input", function () {
+
+    let search = $(this).val();
+    let barangay = $("#filterBarangay").val();
+
+    loadBeneficiary(1, search, barangay);
+
+});
+
+
+// =============================
+// FILTER BARANGAY
+// =============================
+
+$("#filterBarangay").change(function () {
+
+    let barangay = $(this).val();
+    let search = $("#searchInput").val();
+
+    loadBeneficiary(1, search, barangay);
 
 });
