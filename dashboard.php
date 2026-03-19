@@ -47,7 +47,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="beneficiary.php">
                         <i class="fas fa-users"></i>
                         Beneficiaries
                     </a>
@@ -253,4 +253,16 @@
                                 </tbody>
                             </table>
                         </div>
-                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- page-content -->
+
+    </div> <!-- main-content -->
+
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
