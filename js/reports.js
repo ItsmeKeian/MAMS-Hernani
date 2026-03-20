@@ -1,174 +1,6 @@
-// =============================
-// SAVE
-// =============================
 
-$("#saveBeneficiary").click(function () {
 
-    let formData = $("#beneficiaryForm").serialize();
 
-    $.ajax({
-
-        type: "POST",
-        url: "php/create/create_beneficiary.php",
-        data: formData,
-        dataType: "json",
-
-        success: function (res) {
-
-            if (res.status == 1) {
-
-                Swal.fire({
-                    icon: "success",
-                    title: "Saved",
-                    timer: 1200,
-                    showConfirmButton: false
-                }).then(() => {
-
-                    location.reload();
-
-                });
-
-            }
-
-        }
-
-    });
-
-});
-
-
-// =============================
-// Include Family Member
-// =============================
-
-
-
-$("#addFamilyRow").click(function(){
-
-    $("#familyTable tbody").append(`
-
-<tr>
-
-<td>
-<input type="text" name="fm_name[]" class="form-control">
-</td>
-
-<td>
-<input type="text" name="fm_relation[]" class="form-control">
-</td>
-
-<td>
-<input type="date" name="fm_birthdate[]" class="form-control">
-</td>
-
-<td>
-<input type="number" name="fm_age[]" class="form-control">
-</td>
-
-<td>
-<select name="fm_sex[]" class="form-control">
-<option>Male</option>
-<option>Female</option>
-</select>
-</td>
-
-<td>
-<input type="text" name="fm_education[]" class="form-control">
-</td>
-
-<td>
-<input type="text" name="fm_occupation[]" class="form-control">
-</td>
-
-<td>
-<input type="text" name="fm_vulnerability[]" class="form-control">
-</td>
-
-<td>
-
-<button
-type="button"
-class="btn btn-danger removeRow">
-
-X
-
-</button>
-
-</td>
-
-</tr>
-
-`);
-
-});
-
-
-$(document).on("click", ".removeRow", function(){
-
-    $(this).closest("tr").remove();
-
-});
-
-
-
-
-
-// =============================
-// View
-// =============================
-
-$(document).on("click", ".view", function () {
-
-    let id = $(this).data("id");
-
-    window.location.href = "view_beneficiary.php?id=" + id;
-
-});
-
-// =============================
-// DELETE
-// =============================
-
-$(document).on("click", ".delete", function () {
-
-    let id = $(this).data("id");
-
-    Swal.fire({
-        title: "Delete?",
-        icon: "warning",
-        showCancelButton: true
-    }).then((r) => {
-
-        if (!r.isConfirmed) return;
-
-        $.post(
-            "php/delete/delete_beneficiary.php",
-            { id: id },
-            function (res) {
-
-                if (res.status == 1) {
-
-                    Swal.fire({
-                        title: "Deleting...",
-                        timer: 1200,
-                        didOpen: () => Swal.showLoading()
-                    });
-
-                    setTimeout(() => {
-
-                        loadBeneficiary(currentPage);
-
-                    }, 1200);
-
-                }
-
-            },
-            "json"
-        );
-
-    });
-
-});
 
 
 // =============================
@@ -188,7 +20,7 @@ $(function () {
 
 
 
-function loadBeneficiary(page = 1, search = "", barangay = "") {
+function loadBeneficiary(page = 1, search = "", barangay = "", from = "", to = "",  damage = "") {
 
     currentPage = page;
 
@@ -202,7 +34,10 @@ function loadBeneficiary(page = 1, search = "", barangay = "") {
             page: page,
             limit: limit,
             search: search,
-            barangay: barangay
+            barangay: barangay,
+            from: from,
+            to: to,
+            damage: damage
         },
 
         dataType: "json",
@@ -280,21 +115,7 @@ function loadBeneficiary(page = 1, search = "", barangay = "") {
 
                          <td>${b.date_registered}</td>
 
-                        <td>
-
-                            <button class="btn btn-sm btn-info view" data-id="${b.id}">
-                                 <i class="fas fa-eye"></i>
-                            </button>
-
-                            <button class="btn btn-sm btn-warning edit" data-id="${b.id}">
-                                <i class="fas fa-edit"></i>
-                            </button>
-
-                            <button class="btn btn-sm btn-danger delete" data-id="${b.id}">
-                                <i class="fas fa-trash"></i>
-                            </button>
-
-                        </td>
+                     
 
                     </tr>
 
@@ -422,13 +243,31 @@ $(document).on("click", ".page-link", function (e) {
 });
 
 
+
+// date range
+$("#dateFrom, #dateTo").on("change", function () {
+
+    let search = $("#searchInput").val();
+    let barangay = $("#filterBarangay").val();
+    let from = $("#dateFrom").val();
+    let to = $("#dateTo").val();
+    let damage = $("#filterDamage").val();
+
+    loadBeneficiary(1, search, barangay, from, to, damage);
+
+});
+
+
 // SEARCH
 $("#searchInput").on("input", function () {
 
     let search = $(this).val();
     let barangay = $("#filterBarangay").val();
+    let from = $("#dateFrom").val();
+    let to = $("#dateTo").val();
+    let damage = $("#filterDamage").val();
 
-    loadBeneficiary(1, search, barangay);
+    loadBeneficiary(1, search, barangay, from, to, damage);
 
 });
 
@@ -438,21 +277,38 @@ $("#filterBarangay").on("change", function () {
 
     let search = $("#searchInput").val();
     let barangay = $(this).val();
+    let from = $("#dateFrom").val();
+    let to = $("#dateTo").val();
+    let damage = $("#filterDamage").val();
 
-    loadBeneficiary(1, search, barangay);
+    loadBeneficiary(1, search, barangay, from, to, damage);
+
+});
+
+// filter damage
+$("#filterDamage").on("change", function () {
+
+    let search = $("#searchInput").val();
+    let barangay = $("#filterBarangay").val();
+    let from = $("#dateFrom").val();
+    let to = $("#dateTo").val();
+    let damage = $(this).val();
+
+    loadBeneficiary(1, search, barangay, from, to, damage);
 
 });
 
 
 // EXPORT FILTER (search + barangay + date)
 
-$("#filterBarangay, #searchInput, #dateFrom, #dateTo")
+$("#filterBarangay, #searchInput, #dateFrom, #dateTo, #filterDamage")
 .on("change input", function(){
 
     let brgy = $("#filterBarangay").val();
     let search = $("#searchInput").val();
     let from = $("#dateFrom").val();
     let to = $("#dateTo").val();
+    let damage = $("#filterDamage").val();
 
     let url = "php/export/export_beneficiaries.php";
 
@@ -472,6 +328,10 @@ $("#filterBarangay, #searchInput, #dateFrom, #dateTo")
 
     if(to !== ""){
         params.push("to=" + to);
+    }
+    
+    if(damage !== ""){
+        params.push("damage=" + damage);
     }
 
     if(params.length > 0){

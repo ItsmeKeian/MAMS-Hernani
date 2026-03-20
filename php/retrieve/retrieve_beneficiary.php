@@ -6,6 +6,9 @@ $page = $_POST["page"] ?? 1;
 $limit = $_POST["limit"] ?? 5;
 $search = $_POST["search"] ?? "";
 $barangay = $_POST["barangay"] ?? "";
+$from = $_POST["from"] ?? "";
+$to = $_POST["to"] ?? "";
+$damage = $_POST["damage"] ?? "";
 
 $start = ($page - 1) * $limit;
 
@@ -29,6 +32,22 @@ if ($barangay != "") {
 
     $where[] = "addr_barangay = :barangay";
     $params["barangay"] = $barangay;
+
+}
+
+if ($from != "" && $to != "") {
+
+    $where[] = "date_registered BETWEEN :from AND :to";
+
+    $params["from"] = $from;
+    $params["to"] = $to;
+
+}
+
+if ($damage != "") {
+
+    $where[] = "damage_classification = :damage";
+    $params["damage"] = $damage;
 
 }
 

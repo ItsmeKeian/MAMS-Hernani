@@ -137,6 +137,16 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 <div class="d-flex gap-2">
 
+                        <input
+                            type="date"
+                            id="dateFrom"
+                            class="form-control">
+
+                        <input
+                            type="date"
+                            id="dateTo"
+                            class="form-control">
+
                 <input
                         id="searchInput"
                         type="text"
@@ -151,6 +161,8 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <option value="poblacion">Poblacion</option>
 
                          </select>
+
+                        
 
                 </div>
 
@@ -539,9 +551,9 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                             <label>Ownership</label><br>
 
-                            <input type="radio" name="ownership" value="owner"> Owner
-                            <input type="radio" name="ownership" value="renter"> Renter
-                            <input type="radio" name="ownership" value="sharer"> Sharer
+                            <input type="radio" name="ownership" value="Owner"> Owner
+                            <input type="radio" name="ownership" value="Renter"> Renter
+                            <input type="radio" name="ownership" value="Sharer"> Sharer
 
                         </div>
 
@@ -549,8 +561,8 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                             <label>Damage</label><br>
 
-                            <input type="radio" name="damage" value="partial"> Partially Damaged
-                            <input type="radio" name="damage" value="total"> Totally Damaged
+                            <input type="radio" name="damage" value="Partially Damage"> Partially Damaged
+                            <input type="radio" name="damage" value="Totally Damage"> Totally Damaged
 
                     </div>
 

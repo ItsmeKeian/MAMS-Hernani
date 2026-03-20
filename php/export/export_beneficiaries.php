@@ -4,9 +4,38 @@ require "../dbconnect.php";
 
 $barangay = $_GET["barangay"] ?? "";
 $search = $_GET["search"] ?? "";
+$from = $_GET["from"] ?? "";
+$to = $_GET["to"] ?? "";
+$damage = $_GET["damage"] ?? "";
+
+$barangay = $_GET["barangay"] ?? "";
+$search = $_GET["search"] ?? "";
+$from = $_GET["from"] ?? "";
+$to = $_GET["to"] ?? "";
+$damage = $_GET["damage"] ?? "";
+
+$filename = "beneficiaries";
+
+if ($barangay != "") {
+    $filename .= "_barangay_" . $barangay;
+}
+
+if ($search != "") {
+    $filename .= "_search_" . $search;
+}
+
+if ($from != "" && $to != "") {
+    $filename .= "_date_" . $from . "_to_" . $to;
+}
+
+if ($damage != "") {
+    $filename .= "_damage_" . $damage;
+}
+
+$filename .= ".xls";
 
 header("Content-Type: application/vnd.ms-excel");
-header("Content-Disposition: attachment; filename=beneficiaries.xls");
+header("Content-Disposition: attachment; filename=$filename");
 
 
 echo "<table border='1'>";
@@ -82,19 +111,36 @@ if ($barangay != "") {
     $params[] = "%$barangay%";
 }
 
+
 if ($search != "") {
     $sql .= " AND (
         last_name LIKE ?
         OR first_name LIKE ?
         OR middle_name LIKE ?
-        OR contact_number LIKE ?
     )";
 
     $params[] = "%$search%";
     $params[] = "%$search%";
     $params[] = "%$search%";
-    $params[] = "%$search%";
 }
+
+
+if ($from != "" && $to != "") {
+
+    $sql .= " AND date_registered BETWEEN ? AND ?";
+
+    $params[] = $from;
+    $params[] = $to;
+
+}
+
+if ($damage != "") {
+
+    $sql .= " AND damage_classification = ?";
+    $params[] = $damage;
+
+}
+
 
 $sql .= " ORDER BY id DESC";
 
