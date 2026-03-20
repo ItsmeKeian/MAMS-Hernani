@@ -41,7 +41,7 @@
         <nav class="sidebar-nav mt-4">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">
+                    <a class="nav-link active" href="dashboard.php">
                         <i class="fas fa-tachometer-alt"></i>
                         Dashboard
                     </a>
@@ -53,19 +53,19 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="aid_distribution.php">
                         <i class="fas fa-boxes"></i>
                         Aid Distribution
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="reports.php">
                         <i class="fas fa-file-alt"></i>
                         Reports
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="users.php">
                         <i class="fas fa-user-shield"></i>
                         Users
                     </a>
