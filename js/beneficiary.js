@@ -37,6 +37,9 @@ $("#saveBeneficiary").click(function () {
 });
 
 
+// =============================
+// Include Family Member
+// =============================
 
 
 
@@ -105,6 +108,9 @@ $(document).on("click", ".removeRow", function(){
     $(this).closest("tr").remove();
 
 });
+
+
+
 
 
 // =============================
@@ -230,69 +236,69 @@ function loadBeneficiary(page = 1, search = "", barangay = "") {
 
                 tbody.append(`
 
-<tr>
+                    <tr>
 
-<td>
+                        <td>
 
-<div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center">
 
-<div class="avatar bg-primary text-white rounded-circle
-d-flex align-items-center justify-content-center me-2"
-style="width:36px;height:36px;font-size:0.85rem;">
+                                <div class="avatar bg-primary text-white rounded-circle
+                                    d-flex align-items-center justify-content-center me-2"
+                                    style="width:36px;height:36px;font-size:0.85rem;">
 
-${initials}
+                                    ${initials}
 
-</div>
+                                </div>
 
-<div>
+                                <div>
 
-<div class="fw-semibold">
+                                    <div class="fw-semibold">
 
-${b.last_name} ${b.first_name}
+                                        ${b.last_name} ${b.first_name}
 
-</div>
+                                     </div>
 
-</div>
+                                 </div>
 
-</div>
+                            </div>
 
-</td>
+                        </td>
 
-<td>
-${b.house_no} ${b.addr_barangay}
-</td>
+                        <td>
+                            ${b.house_no} ${b.addr_barangay}
+                        </td>
 
-<td>${b.age}</td>
+                        <td>${b.age}</td>
 
-<td>${b.contact_number}</td>
+                        <td>${b.contact_number}</td>
 
-<td>${b.occupation}</td>
+                        <td>${b.occupation}</td>
 
-<td>${b.ownership}</td>
+                        <td>${b.ownership}</td>
 
-<td>${b.damage_classification}</td>
+                         <td>${b.damage_classification}</td>
 
-<td>${b.date_registered}</td>
+                         <td>${b.date_registered}</td>
 
-<td>
+                        <td>
 
-<button class="btn btn-sm btn-info view" data-id="${b.id}">
-<i class="fas fa-eye"></i>
-</button>
+                            <button class="btn btn-sm btn-info view" data-id="${b.id}">
+                                 <i class="fas fa-eye"></i>
+                            </button>
 
-<button class="btn btn-sm btn-warning edit" data-id="${b.id}">
-<i class="fas fa-edit"></i>
-</button>
+                            <button class="btn btn-sm btn-warning edit" data-id="${b.id}">
+                                <i class="fas fa-edit"></i>
+                            </button>
 
-<button class="btn btn-sm btn-danger delete" data-id="${b.id}">
-<i class="fas fa-trash"></i>
-</button>
+                            <button class="btn btn-sm btn-danger delete" data-id="${b.id}">
+                                <i class="fas fa-trash"></i>
+                            </button>
 
-</td>
+                        </td>
 
-</tr>
+                    </tr>
 
-`);
+                    `);
 
             });
 
@@ -416,10 +422,7 @@ $(document).on("click", ".page-link", function (e) {
 });
 
 
-// =============================
 // SEARCH
-// =============================
-
 $("#searchInput").on("input", function () {
 
     let search = $(this).val();
@@ -430,15 +433,39 @@ $("#searchInput").on("input", function () {
 });
 
 
-// =============================
-// FILTER BARANGAY
-// =============================
+// FILTER TABLE
+$("#filterBarangay").on("change", function () {
 
-$("#filterBarangay").change(function () {
-
-    let barangay = $(this).val();
     let search = $("#searchInput").val();
+    let barangay = $(this).val();
 
     loadBeneficiary(1, search, barangay);
+
+});
+
+
+// EXPORT FILTER (search + barangay)
+$("#filterBarangay, #searchInput").on("change input", function(){
+
+    let brgy = $("#filterBarangay").val();
+    let search = $("#searchInput").val();
+
+    let url = "php/export/export_beneficiaries.php";
+
+    let params = [];
+
+    if(brgy !== ""){
+        params.push("barangay=" + brgy);
+    }
+
+    if(search !== ""){
+        params.push("search=" + search);
+    }
+
+    if(params.length > 0){
+        url += "?" + params.join("&");
+    }
+
+    $("#exportBtn").attr("href", url);
 
 });
