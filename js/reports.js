@@ -1,7 +1,35 @@
 
 
 
+function loadSummary(search, barangay, from, to, damage) {
 
+    $.ajax({
+
+        type: "POST",
+        url: "php/retrieve/retrieve_summary.php",
+
+        data: {
+            search: search,
+            barangay: barangay,
+            from: from,
+            to: to,
+            damage: damage
+        },
+
+        dataType: "json",
+
+        success: function (res) {
+
+            $("#totalCount").text(res.total);
+            $("#partialCount").text(res.partial);
+            $("#totalDamageCount").text(res.totalDamage);
+            $("#fourpsCount").text(res.fourps);
+
+        }
+
+    });
+
+}
 
 // =============================
 // TABLE + PAGINATION
@@ -14,15 +42,23 @@ let maxVisible = 3;
 
 $(function () {
 
-    loadBeneficiary(1);
+    let search = "";
+    let barangay = "";
+    let from = "";
+    let to = "";
+    let damage = "";
+
+    loadBeneficiary(1, search, barangay, from, to, damage);
 
 });
 
 
 
-function loadBeneficiary(page = 1, search = "", barangay = "", from = "", to = "",  damage = "") {
+function loadBeneficiary(page = 1, search = "", barangay = "", from = "", to = "", damage = "") {
 
     currentPage = page;
+
+    loadSummary(search, barangay, from, to, damage);
 
     $.ajax({
 
@@ -329,7 +365,7 @@ $("#filterBarangay, #searchInput, #dateFrom, #dateTo, #filterDamage")
     if(to !== ""){
         params.push("to=" + to);
     }
-    
+
     if(damage !== ""){
         params.push("damage=" + damage);
     }
@@ -339,5 +375,12 @@ $("#filterBarangay, #searchInput, #dateFrom, #dateTo, #filterDamage")
     }
 
     $("#exportBtn").attr("href", url);
+
+    $("#printBtn").attr(
+        "href",
+        url
+        .replace("export/export_beneficiaries.php",
+                "print/print_report.php")
+    );
 
 });

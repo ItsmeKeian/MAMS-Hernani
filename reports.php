@@ -117,8 +117,14 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </header>
 
+
+        
+
         <!-- Page Content -->
         <div class="page-content">
+
+
+        
 
 
         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -129,6 +135,13 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     href="php/export/export_beneficiaries.php"
                     class="btn btn-success">
                     Export Excel
+                    </a>
+
+                    <a id="printBtn"
+                    href="php/print/print_report.php"
+                    target="_blank"
+                    class="btn btn-primary">
+                    Print Report
                     </a>
 
                 </div>
@@ -174,6 +187,80 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </div>
 
             </div>
+
+
+            <div class="row g-4 mb-4">
+
+            <!-- TOTAL -->
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card blue">
+
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+
+                    <div>
+                        <h3 id="totalCount" class="stat-number">0</h3>
+                        <p class="stat-label">Total Beneficiaries</p>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- PARTIAL -->
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card yellow">
+
+                    <div class="stat-icon">
+                        <i class="fas fa-house-damage"></i>
+                    </div>
+
+                    <div>
+                        <h3 id="partialCount" class="stat-number">0</h3>
+                        <p class="stat-label">Partial Damage</p>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- TOTAL DAMAGE -->
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card red">
+
+                    <div class="stat-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+
+                    <div>
+                        <h3 id="totalDamageCount" class="stat-number">0</h3>
+                        <p class="stat-label">Total Damage</p>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- 4PS -->
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card green">
+
+                    <div class="stat-icon">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+
+                    <div>
+                        <h3 id="fourpsCount" class="stat-number">0</h3>
+                        <p class="stat-label">4Ps Beneficiaries</p>
+                    </div>
+
+                </div>
+            </div>
+
+            </div>
+
+            
             <!-- Stats Cards Row -->
            
 
