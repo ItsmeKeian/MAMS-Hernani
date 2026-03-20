@@ -127,6 +127,9 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
                         <i class="fas fa-user-plus"></i> Add Beneficiary
                     </button>
+                    <a href="php/export/export_beneficiaries.php" class="btn btn-success">
+                        <i class="fas fa-file-excel"></i> Export Excel
+                    </a>
                 </div>
 
                 <div class="d-flex gap-2">

@@ -70,7 +70,7 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="report.php">
+                    <a class="nav-link active" href="reports.php">
                         <i class="fas fa-file-alt"></i>
                         Reports
                     </a>
