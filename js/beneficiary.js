@@ -9,7 +9,7 @@ $("#saveBeneficiary").click(function () {
     $.ajax({
 
         type: "POST",
-        url: "php/create/create_beneficiary.php",
+        url: "../php/create/create_beneficiary.php",
         data: formData,
         dataType: "json",
 
@@ -142,7 +142,7 @@ $(document).on("click", ".delete", function () {
         if (!r.isConfirmed) return;
 
         $.post(
-            "php/delete/delete_beneficiary.php",
+            "../php/delete/delete_beneficiary.php",
             { id: id },
             function (res) {
 
@@ -196,7 +196,7 @@ function loadBeneficiary(page = 1, search = "", barangay = "") {
 
         type: "POST",
 
-        url: "php/retrieve/retrieve_beneficiary.php",
+        url: "../php/retrieve/retrieve_beneficiary.php",
 
         data: {
             page: page,
@@ -453,7 +453,7 @@ $("#filterBarangay, #searchInputo")
     let search = $("#searchInput").val();
    
 
-    let url = "php/export/export_beneficiaries.php";
+    let url = "../php/export/export_beneficiaries.php";
 
     let params = [];
 

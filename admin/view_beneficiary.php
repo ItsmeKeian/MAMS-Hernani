@@ -1,6 +1,6 @@
 <?php
 
-require "php/dbconnect.php";
+require "../php/dbconnect.php";
 
 $id = $_GET["id"];
 

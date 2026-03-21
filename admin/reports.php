@@ -1,24 +1,5 @@
 <?php
-
-session_start();
-
-if (!isset($_SESSION["user"])) {
-    header("Location: index.html");
-    exit();
-}
-
-require "php/dbconnect.php";
-
-
-$stmt = $conn->prepare("
-    SELECT * FROM beneficiaries
-    ORDER BY id DESC
-");
-
-$stmt->execute();
-
-$beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+require "../php/admin_only.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,14 +7,14 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Municipal Aid Monitoring System - Municipality of Hernani</title>
-    <link href="assets/img/logo.jpg" rel="icon">
+    <link href="../assets/img/logo.jpg" rel="icon">
     <!-- Bootstrap 5 CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- FontAwesome 6 -->
 
-    <link rel="stylesheet" href="assets/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
     
   
 </head>
@@ -43,7 +24,7 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="sidebar-logo">
             <!-- Philippine Municipality Logo Placeholder -->
             <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #fbbf24, #f59e0b); border-radius: 12px; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: #1e3a8a; font-weight: bold;">
-                <img class="logo" src="assets/img/logo.jpg" alt="logo">
+                <img class="logo" src="../assets/img/logo.jpg" alt="logo">
             </div>
             <h4 class="sidebar-title mb-1">Municipality of Hernani</h4>
             
@@ -82,7 +63,7 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </a>
                 </li>
                 <li class="nav-item mt-auto">
-                    <a class="nav-link" href="php/logout.php">
+                    <a class="nav-link" href="../php/logout.php">
                         <i class="fas fa-sign-out-alt"></i>
                         Logout
                     </a>
@@ -103,14 +84,14 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="d-flex align-items-center">
                     <div class="dropdown">
                         <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
-                            <img src="assets/img/logo.jpg" class="rounded-circle me-2" width="40" height="40" alt="Admin">
+                            <img src="../assets/img/logo.jpg" class="rounded-circle me-2" width="40" height="40" alt="Admin">
                             <span class="d-none d-md-inline fw-semibold">Administrator</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
                             <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="php/logout.php"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                            <li><a class="dropdown-item" href="../php/logout.php"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
                         </ul>
                     </div>
                 </div>
@@ -276,7 +257,7 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="mb-0">
                 <i class="fas fa-list me-2 text-gold"></i>
-                Beneficiary Records
+                Reports
             </h5>
         </div>
 
@@ -334,10 +315,10 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!-- 50% -->
 
 
-<script src="assets/js/jquery-4.0.0.min.js"></script>
+<script src="../assets/js/jquery-4.0.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="assets/js/bootstrap.bundle.min.js"></script>
-<script src="js/reports.js"></script>
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script src="../js/reports.js"></script>
 
 </body>
 </html>

@@ -6,7 +6,7 @@ function loadSummary(search, barangay, from, to, damage) {
     $.ajax({
 
         type: "POST",
-        url: "php/retrieve/retrieve_summary.php",
+        url: "../php/retrieve/retrieve_summary.php",
 
         data: {
             search: search,
@@ -64,7 +64,7 @@ function loadBeneficiary(page = 1, search = "", barangay = "", from = "", to = "
 
         type: "POST",
 
-        url: "php/retrieve/retrieve_beneficiary.php",
+        url: "../php/retrieve/retrieve_beneficiary.php",
 
         data: {
             page: page,
@@ -346,7 +346,7 @@ $("#filterBarangay, #searchInput, #dateFrom, #dateTo, #filterDamage")
     let to = $("#dateTo").val();
     let damage = $("#filterDamage").val();
 
-    let url = "php/export/export_beneficiaries.php";
+    let url = "../php/export/export_beneficiaries.php";
 
     let params = [];
 
@@ -379,8 +379,8 @@ $("#filterBarangay, #searchInput, #dateFrom, #dateTo, #filterDamage")
     $("#printBtn").attr(
         "href",
         url
-        .replace("export/export_beneficiaries.php",
-                "print/print_report.php")
+        .replace("../export/export_beneficiaries.php",
+                "../print/print_report.php")
     );
 
 });
