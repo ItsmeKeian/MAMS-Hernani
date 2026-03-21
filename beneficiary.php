@@ -127,26 +127,13 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
                         <i class="fas fa-user-plus"></i> Add Beneficiary
                     </button>
-                    <a id="exportBtn"
-                    href="php/export/export_beneficiaries.php"
-                    class="btn btn-success">
-                    Export Excel
-                    </a>
+                 
 
                 </div>
 
                 <div class="d-flex gap-2">
 
-                        <input
-                            type="date"
-                            id="dateFrom"
-                            class="form-control">
-
-                        <input
-                            type="date"
-                            id="dateTo"
-                            class="form-control">
-
+                       
                 <input
                         id="searchInput"
                         type="text"
@@ -175,62 +162,62 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <!-- Recent Aid Distribution -->
                
 
-<div class="col-12">
+                <div class="col-12">
 
-    <div class="table-container">
+                    <div class="table-container">
 
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">
-                <i class="fas fa-list me-2 text-gold"></i>
-                Beneficiary Records
-            </h5>
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">
+                                <i class="fas fa-list me-2 text-gold"></i>
+                                Beneficiary Records
+                            </h5>
+                        </div>
+
+
+                        <div class="table-responsive">
+
+                        <table id="beneficiaryTable" class="table">
+
+                                <thead>
+
+                                        <tr>
+
+                                                <th>Name</th>
+                                                <th>Address</th>
+                                                <th>Age</th>
+                                                <th>Contact</th>
+                                                <th>Occupation</th>
+                                                <th>Ownership</th>
+                                                <th>Damage</th>
+                                                <th>Date</th>
+                                                <th>Action</th>
+
+                                        </tr>
+
+                                </thead>
+
+                            <tbody>
+
+                            </tbody>
+
+                            </table>
+
+
+                            <div class="d-flex justify-content-between mt-2">
+
+                        <div id="recordCount"></div>
+
+                        </div>
+
+                        <ul class="pagination justify-content-center"></ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
         </div>
-
-
-        <div class="table-responsive">
-
-        <table id="beneficiaryTable" class="table">
-
-                <thead>
-
-                        <tr>
-
-                                <th>Name</th>
-                                <th>Address</th>
-                                <th>Age</th>
-                                <th>Contact</th>
-                                <th>Occupation</th>
-                                <th>Ownership</th>
-                                <th>Damage</th>
-                                <th>Date</th>
-                                <th>Action</th>
-
-                        </tr>
-
-                </thead>
-
-            <tbody>
-
-            </tbody>
-
-            </table>
-
-
-            <div class="d-flex justify-content-between mt-2">
-
-        <div id="recordCount"></div>
-
-        </div>
-
-        <ul class="pagination justify-content-center"></ul>
-
-        </div>
-
-    </div>
-
-</div>
-
-</div>
                     
 
         </div> <!-- page-content -->
@@ -238,365 +225,365 @@ $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div> <!-- main-content -->
 
 
-<!-- ADD BENEFICIARY MODAL -->
-<div class="modal fade" id="addModal">
-    <div class="modal-dialog modal-xl modal-dialog-scrollable">
-        <div class="modal-content">
+        <!-- ADD BENEFICIARY MODAL -->
+        <div class="modal fade" id="addModal">
+            <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                <div class="modal-content">
 
-        <div class="modal-header">
-            <h5>Add Beneficiary</h5>
-            <button class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
+                <div class="modal-header">
+                    <h5>Add Beneficiary</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
 
-        <div class="modal-body">
+                <div class="modal-body">
 
 
-            <form id="beneficiaryForm">
+                    <form id="beneficiaryForm">
 
-                    <!-- ================= LOCATION ================= -->
+                            <!-- ================= LOCATION ================= -->
+
+                            <h5 class="mb-3 text-primary">
+                                Location of Affected Family
+                            </h5>
+
+                            <div class="row">
+
+                                <div class="col-md-4 mb-3">
+                                    <label>Region</label>
+                                    <input type="text" name="region" class="form-control">
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label>Province</label>
+                                    <input type="text" name="province" class="form-control">
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label>Municipality</label>
+                                    <input type="text" name="municipality" class="form-control">
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label>Barangay</label>
+                                    <input type="text" name="barangay" class="form-control">
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label>District</label>
+                                    <input type="text" name="district" class="form-control">
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label>Evacuation Site</label>
+                                    <input type="text" name="evacuation" class="form-control">
+                                </div>
+
+                            </div>
+
+                            <hr>
+                            <!-- ================= HEAD ================= -->
+
+                <h5 class="mb-3 text-primary">
+                    Head of Family
+                </h5>
+
+                        <div class="row">
+
+                            <div class="col-md-3 mb-3">
+                                <label>Last Name</label>
+                                <input type="text" name="last_name" class="form-control">
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label>First Name</label>
+                                <input type="text" name="first_name" class="form-control">
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label>Middle Name</label>
+                                <input type="text" name="middle_name" class="form-control">
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label>Name Extension</label>
+                                <input type="text" name="name_ext" class="form-control">
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label>Birthdate</label>
+                                <input type="date" name="birthdate" class="form-control">
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label>Age</label>
+                                <input type="number" name="age" class="form-control">
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label>Place of Birth</label>
+                                <input type="text" name="place_of_birth" class="form-control">
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label>Sex</label>
+                                    <select name="sex" class="form-select">
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label>Civil Status</label>
+                                <input type="text" name="civil_status" class="form-control">
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label>Mother's Maiden Name</label>
+                                <input type="text" name="mothers_maiden_name" class="form-control">
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label>Religion</label>
+                                <input type="text" name="religion" class="form-control">
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label>Occupation</label>
+                                <input type="text" name="occupation" class="form-control">
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label>Monthly Income</label>
+                                <input type="number" name="monthly_income" class="form-control">
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label>ID Card Presented</label>
+                                <input type="text" name="id_card_presented" class="form-control">
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label>ID Number</label>
+                                <input type="text" name="id_number" class="form-control">
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label>Contact Number</label>
+                                <input type="text" name="contact_number" class="form-control">
+                            </div>
+
+                    </div>
+
+
+                            <hr>
+
+
+                            <!-- ================= ADDRESS ================= -->
 
                     <h5 class="mb-3 text-primary">
-                        Location of Affected Family
+                        Permanent Address
                     </h5>
 
-                    <div class="row">
+                        <div class="row">
 
-                        <div class="col-md-4 mb-3">
-                            <label>Region</label>
-                            <input type="text" name="region" class="form-control">
+                            <div class="col-md-3 mb-3">
+                                <label>House No</label>
+                                <input type="text" name="house_no" class="form-control">
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label>Street</label>
+                                <input type="text" name="street" class="form-control">
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label>Sitio</label>
+                                <input type="text" name="sitio" class="form-control">
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label>Barangay</label>
+                                <input type="text" name="addr_barangay" class="form-control">
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label>City</label>
+                                <input type="text" name="addr_city" class="form-control">
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label>Province</label>
+                                <input type="text" name="addr_province" class="form-control">
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label>Zip Code</label>
+                                <input type="text" name="zip_code" class="form-control">
+                            </div>
+
+                    </div>
+
+
+                            <hr>
+
+                    <h5 class="mb-3 text-primary">
+                    Others
+                    </h5>
+
+                        <div class="row">
+
+                            <div class="col-md-3 mb-3">
+                                <label>
+                                <input type="checkbox" name="is_4ps" value="1">
+                                4Ps Beneficiary
+                                </label>
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label>IP Type</label>
+                                <input type="text" name="ip_type" class="form-control">
+                            </div>
+
                         </div>
 
-                        <div class="col-md-4 mb-3">
-                            <label>Province</label>
-                            <input type="text" name="province" class="form-control">
+                            <hr>
+
+
+                            <!-- ================= FAMILY MEMBERS ================= -->
+
+                            <h5 class="mb-3 text-primary">
+                                Family Information
+                                </h5>
+
+                                <table class="table table-bordered" id="familyTable">
+
+                                <thead>
+
+                                <tr>
+
+                                <th>Family Member</th>
+                                <th>Relation</th>
+                                <th>Birthdate</th>
+                                <th>Age</th>
+                                <th>Sex</th>
+                                <th>Education</th>
+                                <th>Occupation</th>
+                                <th>Vulnerability</th>
+                                <th></th>
+
+                                </tr>
+
+                                </thead>
+
+                                <tbody>
+
+                                </tbody>
+
+                                </table>
+
+                                <button
+                                type="button"
+                                class="btn btn-sm btn-primary"
+                                id="addFamilyRow">
+
+                                Add Member
+
+                                </button>
+
+                                <hr>
+
+
+                            <!-- ================= ACCOUNT ================= -->
+
+                            <h5 class="mb-3 text-primary">
+                                Account Information
+                            </h5>
+
+                            <div class="row">
+
+                                <div class="col-md-6 mb-3">
+                                    <label>Bank / E-wallet</label>
+                                    <input type="text" name="bank" class="form-control">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label>Account Name</label>
+                                    <input type="text" name="account_name" class="form-control">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label>Account Type</label>
+                                    <input type="text" name="account_type" class="form-control">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label>Account Number</label>
+                                    <input type="text" name="account_number" class="form-control">
+                                </div>
+
+                            </div>
+
+
+                            <hr>
+
+
+                            <!-- ================= DAMAGE ================= -->
+                            <h5 class="mb-3 text-primary">
+                            House Damage Info
+                            </h5>
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+
+                                    <label>Ownership</label><br>
+
+                                    <input type="radio" name="ownership" value="Owner"> Owner
+                                    <input type="radio" name="ownership" value="Renter"> Renter
+                                    <input type="radio" name="ownership" value="Sharer"> Sharer
+
+                                </div>
+
+                            <div class="col-md-6">
+
+                                    <label>Damage</label><br>
+
+                                    <input type="radio" name="damage" value="Partially Damage"> Partially Damaged
+                                    <input type="radio" name="damage" value="Totally Damage"> Totally Damaged
+
+                            </div>
+
                         </div>
 
-                        <div class="col-md-4 mb-3">
-                            <label>Municipality</label>
-                            <input type="text" name="municipality" class="form-control">
-                        </div>
 
-                        <div class="col-md-4 mb-3">
-                            <label>Barangay</label>
-                            <input type="text" name="barangay" class="form-control">
-                        </div>
+                            <hr>
 
-                        <div class="col-md-4 mb-3">
-                            <label>District</label>
-                            <input type="text" name="district" class="form-control">
-                        </div>
-
-                        <div class="col-md-4 mb-3">
-                            <label>Evacuation Site</label>
-                            <input type="text" name="evacuation" class="form-control">
-                        </div>
-
-                    </div>
-
-                    <hr>
-                    <!-- ================= HEAD ================= -->
-
-          <h5 class="mb-3 text-primary">
-             Head of Family
-           </h5>
-
-                 <div class="row">
-
-                     <div class="col-md-3 mb-3">
-                        <label>Last Name</label>
-                        <input type="text" name="last_name" class="form-control">
-                     </div>
-
-                     <div class="col-md-3 mb-3">
-                        <label>First Name</label>
-                        <input type="text" name="first_name" class="form-control">
-                    </div>
-
-                    <div class="col-md-3 mb-3">
-                        <label>Middle Name</label>
-                        <input type="text" name="middle_name" class="form-control">
-                    </div>
-
-                    <div class="col-md-3 mb-3">
-                        <label>Name Extension</label>
-                        <input type="text" name="name_ext" class="form-control">
-                    </div>
-
-                    <div class="col-md-3 mb-3">
-                        <label>Birthdate</label>
-                         <input type="date" name="birthdate" class="form-control">
-                    </div>
-
-                    <div class="col-md-3 mb-3">
-                        <label>Age</label>
-                        <input type="number" name="age" class="form-control">
-                    </div>
-
-                    <div class="col-md-3 mb-3">
-                        <label>Place of Birth</label>
-                        <input type="text" name="place_of_birth" class="form-control">
-                    </div>
-
-                    <div class="col-md-3 mb-3">
-                        <label>Sex</label>
-                            <select name="sex" class="form-select">
-                                <option>Male</option>
-                                <option>Female</option>
-                            </select>
-                     </div>
-
-                    <div class="col-md-3 mb-3">
-                        <label>Civil Status</label>
-                        <input type="text" name="civil_status" class="form-control">
-                    </div>
-
-                     <div class="col-md-3 mb-3">
-                        <label>Mother's Maiden Name</label>
-                        <input type="text" name="mothers_maiden_name" class="form-control">
-                    </div>
-
-                     <div class="col-md-3 mb-3">
-                        <label>Religion</label>
-                        <input type="text" name="religion" class="form-control">
-                    </div>
-
-                    <div class="col-md-3 mb-3">
-                        <label>Occupation</label>
-                        <input type="text" name="occupation" class="form-control">
-                    </div>
-
-                    <div class="col-md-3 mb-3">
-                        <label>Monthly Income</label>
-                        <input type="number" name="monthly_income" class="form-control">
-                     </div>
-
-                    <div class="col-md-3 mb-3">
-                        <label>ID Card Presented</label>
-                        <input type="text" name="id_card_presented" class="form-control">
-                    </div>
-
-                    <div class="col-md-3 mb-3">
-                        <label>ID Number</label>
-                        <input type="text" name="id_number" class="form-control">
-                    </div>
-
-                     <div class="col-md-3 mb-3">
-                        <label>Contact Number</label>
-                        <input type="text" name="contact_number" class="form-control">
-                     </div>
-
-             </div>
+                            <div class="col-md-12 mb-3">
+                                <label>Date Registered</label>
+                                <input type="date" name="date_registered" class="form-control">
+                            </div>
 
 
-                    <hr>
+                            <div class="mt-3">
+
+                                <button type="button" id="saveBeneficiary" class="btn btn-success">
+                                    Save Beneficiary
+                                </button>
+
+                                <a href="beneficiary.php" class="btn btn-secondary">
+                                    Cancel
+                                </a>
+
+                            </div>
+
+                            </form>
 
 
-                    <!-- ================= ADDRESS ================= -->
-
-            <h5 class="mb-3 text-primary">
-                Permanent Address
-            </h5>
-
-                <div class="row">
-
-                    <div class="col-md-3 mb-3">
-                        <label>House No</label>
-                        <input type="text" name="house_no" class="form-control">
-                    </div>
-
-                    <div class="col-md-3 mb-3">
-                        <label>Street</label>
-                        <input type="text" name="street" class="form-control">
-                    </div>
-
-                    <div class="col-md-3 mb-3">
-                        <label>Sitio</label>
-                        <input type="text" name="sitio" class="form-control">
-                    </div>
-
-                    <div class="col-md-3 mb-3">
-                        <label>Barangay</label>
-                        <input type="text" name="addr_barangay" class="form-control">
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                        <label>City</label>
-                        <input type="text" name="addr_city" class="form-control">
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                        <label>Province</label>
-                        <input type="text" name="addr_province" class="form-control">
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                        <label>Zip Code</label>
-                        <input type="text" name="zip_code" class="form-control">
-                    </div>
-
-            </div>
-
-
-                    <hr>
-
-            <h5 class="mb-3 text-primary">
-              Others
-            </h5>
-
-                 <div class="row">
-
-                    <div class="col-md-3 mb-3">
-                        <label>
-                        <input type="checkbox" name="is_4ps" value="1">
-                        4Ps Beneficiary
-                        </label>
-                    </div>
-
-                    <div class="col-md-3 mb-3">
-                        <label>IP Type</label>
-                        <input type="text" name="ip_type" class="form-control">
                     </div>
 
                 </div>
-
-                    <hr>
-
-
-                    <!-- ================= FAMILY MEMBERS ================= -->
-
-                    <h5 class="mb-3 text-primary">
-                        Family Information
-                        </h5>
-
-                        <table class="table table-bordered" id="familyTable">
-
-                        <thead>
-
-                        <tr>
-
-                        <th>Family Member</th>
-                        <th>Relation</th>
-                        <th>Birthdate</th>
-                        <th>Age</th>
-                        <th>Sex</th>
-                        <th>Education</th>
-                        <th>Occupation</th>
-                        <th>Vulnerability</th>
-                        <th></th>
-
-                        </tr>
-
-                        </thead>
-
-                        <tbody>
-
-                        </tbody>
-
-                        </table>
-
-                        <button
-                        type="button"
-                        class="btn btn-sm btn-primary"
-                        id="addFamilyRow">
-
-                        Add Member
-
-                        </button>
-
-                        <hr>
-
-
-                    <!-- ================= ACCOUNT ================= -->
-
-                    <h5 class="mb-3 text-primary">
-                        Account Information
-                    </h5>
-
-                    <div class="row">
-
-                        <div class="col-md-6 mb-3">
-                            <label>Bank / E-wallet</label>
-                            <input type="text" name="bank" class="form-control">
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label>Account Name</label>
-                            <input type="text" name="account_name" class="form-control">
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label>Account Type</label>
-                            <input type="text" name="account_type" class="form-control">
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label>Account Number</label>
-                            <input type="text" name="account_number" class="form-control">
-                        </div>
-
-                    </div>
-
-
-                    <hr>
-
-
-                    <!-- ================= DAMAGE ================= -->
-                    <h5 class="mb-3 text-primary">
-                    House Damage Info
-                    </h5>
-
-                    <div class="row">
-
-                        <div class="col-md-6">
-
-                            <label>Ownership</label><br>
-
-                            <input type="radio" name="ownership" value="Owner"> Owner
-                            <input type="radio" name="ownership" value="Renter"> Renter
-                            <input type="radio" name="ownership" value="Sharer"> Sharer
-
-                        </div>
-
-                    <div class="col-md-6">
-
-                            <label>Damage</label><br>
-
-                            <input type="radio" name="damage" value="Partially Damage"> Partially Damaged
-                            <input type="radio" name="damage" value="Totally Damage"> Totally Damaged
-
-                    </div>
-
-                </div>
-
-
-                    <hr>
-
-                    <div class="col-md-12 mb-3">
-                        <label>Date Registered</label>
-                        <input type="date" name="date_registered" class="form-control">
-                    </div>
-
-
-                    <div class="mt-3">
-
-                        <button type="button" id="saveBeneficiary" class="btn btn-success">
-                            Save Beneficiary
-                        </button>
-
-                        <a href="beneficiary.php" class="btn btn-secondary">
-                            Cancel
-                        </a>
-
-                    </div>
-
-                    </form>
-
-
             </div>
-
         </div>
-    </div>
-</div>
  
 
 

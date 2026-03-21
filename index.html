@@ -78,32 +78,41 @@
     <script>
 
             $("#loginForm").submit(function(e){
+
                 e.preventDefault();
 
-               
                 $.ajax({
+
                     url: "php/login.php",
                     type: "POST",
                     data: $(this).serialize(),
 
-                   
-
                     success: function(res){
-                        
-                        console.log(res)
 
                         let data = JSON.parse(res);
 
                         if(data.status === "success"){
 
-                            window.location = "dashboard.php";
+                            if(data.role === "admin"){
 
-                        } else {
+                                window.location = "admin/dashboard.php";
 
-                            $("#msg").text(data.message);
+                            } else {
+
+                                window.location = "user/dashboard.php";
+
+                            }
+
+                        }else{
+
+                            alert(data.message);
+
                         }
+
                     }
+
                 });
+
             });
 
 

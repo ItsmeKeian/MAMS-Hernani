@@ -446,13 +446,12 @@ $("#filterBarangay").on("change", function () {
 
 // EXPORT FILTER (search + barangay + date)
 
-$("#filterBarangay, #searchInput, #dateFrom, #dateTo")
+$("#filterBarangay, #searchInputo")
 .on("change input", function(){
 
     let brgy = $("#filterBarangay").val();
     let search = $("#searchInput").val();
-    let from = $("#dateFrom").val();
-    let to = $("#dateTo").val();
+   
 
     let url = "php/export/export_beneficiaries.php";
 
@@ -466,18 +465,11 @@ $("#filterBarangay, #searchInput, #dateFrom, #dateTo")
         params.push("search=" + search);
     }
 
-    if(from !== ""){
-        params.push("from=" + from);
-    }
-
-    if(to !== ""){
-        params.push("to=" + to);
-    }
-
+   
     if(params.length > 0){
         url += "?" + params.join("&");
     }
 
-    $("#exportBtn").attr("href", url);
+   
 
 });

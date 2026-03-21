@@ -1,6 +1,5 @@
 <?php
 
-
 session_start();
 
 require "dbconnect.php";
@@ -16,17 +15,19 @@ $stmt->execute([$username]);
 
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+if ($user) {
 
-if($user){
+    // if using plain password (your current)
+    if ($password == $user["password"]) {
 
-    if($password == $user["password"]){
-
-        $_SESSION["user"] = $user["username"];
+        $_SESSION["user_id"] = $user["id"];
+        $_SESSION["username"] = $user["username"];
+        $_SESSION["role"] = $user["role"];
 
         echo json_encode([
-            "status" => "success"
+            "status" => "success",
+            "role" => $user["role"]
         ]);
-
 
     } else {
 
@@ -34,7 +35,7 @@ if($user){
             "status" => "error",
             "message" => "Wrong password"
         ]);
-        
+
     }
 
 } else {
@@ -45,7 +46,3 @@ if($user){
     ]);
 
 }
-
-
-
-?>
