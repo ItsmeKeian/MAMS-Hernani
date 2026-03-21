@@ -17,8 +17,8 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if ($user) {
 
-    // if using plain password (your current)
-    if ($password == $user["password"]) {
+    // ✅ verify hashed password
+    if (password_verify($password, $user["password"])) {
 
         $_SESSION["user_id"] = $user["id"];
         $_SESSION["username"] = $user["username"];

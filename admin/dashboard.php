@@ -61,6 +61,20 @@ require "../php/admin_only.php";
                         Users
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="logs.php">
+                    <i class="fas fa-clipboard-list"></i>
+                        Logs
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="settings.php">
+                    <i class="fas fa-gear"></i>
+                        Settings
+                    </a>
+                </li>
+
                 <li class="nav-item mt-auto">
                     <a class="nav-link" href="../php/logout.php">
                         <i class="fas fa-sign-out-alt"></i>

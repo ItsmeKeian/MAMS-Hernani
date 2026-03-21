@@ -9,6 +9,11 @@ $email = $_POST["email"];
 $password = $_POST["password"];
 $role = $_POST["role"];
 
+
+// ✅ HASH PASSWORD
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+
 $stmt = $conn->prepare(
 "INSERT INTO user (name, username, email, password, role)
  VALUES (?, ?, ?, ?, ?)"
@@ -18,7 +23,7 @@ $stmt->execute([
     $name,
     $username,
     $email,
-    $password,
+    $hashedPassword, // ✅ use hashed password
     $role
 ]);
 

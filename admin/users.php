@@ -62,6 +62,20 @@ require "../php/admin_only.php";
                         Users
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="logs.php">
+                    <i class="fas fa-clipboard-list"></i>
+                        Logs
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="settings.php">
+                    <i class="fas fa-gear"></i>
+                        Settings
+                    </a>
+                </li>
+
                 <li class="nav-item mt-auto">
                     <a class="nav-link" href="../php/logout.php">
                         <i class="fas fa-sign-out-alt"></i>
@@ -85,7 +99,7 @@ require "../php/admin_only.php";
                     </button>
 
                     <div>
-                        <h1 class="header-title mb-1">Dashboard</h1>
+                        <h1 class="header-title mb-1">Users</h1>
                         <p class="header-subtitle mb-0">
                         Welcome back, Administrator. Here's what's happening today.
                         </p>
@@ -153,6 +167,7 @@ require "../php/admin_only.php";
                         <tr>
 
                                 <th>Name</th>
+                                <th>Role</th>
                                 <th>Username</th>
                                 <th>Email</th>
                                 <th>Date Created</th>

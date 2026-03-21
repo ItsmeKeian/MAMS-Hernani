@@ -40,7 +40,9 @@ function loadUsers() {
                     <tr>
 
                         <td>${u.name ?? ""}</td>
+                         <td>${u.role ?? ""}</td>
                         <td>${u.username ?? ""}</td>
+                       
                         <td>${u.email ?? ""}</td>
                         <td>${u.created_at ?? ""}</td>
 

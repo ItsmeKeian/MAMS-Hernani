@@ -8,7 +8,12 @@ $username = $_POST["username"];
 $email = $_POST["email"];
 $password = $_POST["password"] ?? "";
 
-if($password != ""){
+
+// ✅ if may new password
+if ($password != "") {
+
+    // hash new password
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     $stmt = $conn->prepare(
     "UPDATE user
@@ -20,12 +25,13 @@ if($password != ""){
         $name,
         $username,
         $email,
-        $password,
+        $hashedPassword,
         $id
     ]);
 
-}else{
+} else {
 
+    // no password change
     $stmt = $conn->prepare(
     "UPDATE user
      SET name=?, username=?, email=?
@@ -42,5 +48,5 @@ if($password != ""){
 }
 
 echo json_encode([
-    "status"=>1
+    "status" => 1
 ]);
