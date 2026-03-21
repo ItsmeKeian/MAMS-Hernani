@@ -77,9 +77,20 @@ require "../php/admin_only.php";
         <!-- Header -->
         <header class="header">
             <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <h1 class="header-title mb-1">Aid Distribution</h1>
-                    <p class="header-subtitle mb-0">Welcome back, Administrator. Here's what's happening today.</p>
+
+                <div class="d-flex align-items-center">
+
+                    <button class="btn btn-outline-primary d-lg-none me-2" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+
+                    <div>
+                        <h1 class="header-title mb-1">Dashboard</h1>
+                        <p class="header-subtitle mb-0">
+                        Welcome back, Administrator. Here's what's happening today.
+                        </p>
+                    </div>
+
                 </div>
                 <div class="d-flex align-items-center">
                     <div class="dropdown">
@@ -569,5 +580,28 @@ require "../php/admin_only.php";
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
 <script src="../js/beneficiary.js"></script>
 
+<script>
+
+$("#menuToggle").click(function () {
+
+    $(".sidebar").toggleClass("show");
+
+});
+
+
+// close sidebar when clicking outside (mobile)
+
+$(document).click(function (e) {
+
+    if (
+        !$(e.target).closest(".sidebar").length &&
+        !$(e.target).closest("#menuToggle").length
+    ) {
+        $(".sidebar").removeClass("show");
+    }
+
+});
+
+</script>
 </body>
 </html>

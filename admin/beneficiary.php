@@ -77,9 +77,20 @@ require "../php/admin_only.php";
         <!-- Header -->
         <header class="header">
             <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <h1 class="header-title mb-1">Beneficiaries</h1>
-                    <p class="header-subtitle mb-0">Welcome back, Administrator. Here's what's happening today.</p>
+
+                <div class="d-flex align-items-center">
+
+                    <button class="btn btn-outline-primary d-lg-none me-2" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+
+                    <div>
+                        <h1 class="header-title mb-1">Dashboard</h1>
+                        <p class="header-subtitle mb-0">
+                        Welcome back, Administrator. Here's what's happening today.
+                        </p>
+                    </div>
+
                 </div>
                 <div class="d-flex align-items-center">
                     <div class="dropdown">
@@ -102,7 +113,7 @@ require "../php/admin_only.php";
         <div class="page-content">
 
 
-        <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2 mb-3">
 
                 <div>
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
@@ -112,16 +123,16 @@ require "../php/admin_only.php";
 
                 </div>
 
-                <div class="d-flex gap-2">
+                <div class="d-flex flex-column flex-md-row gap-2">
 
                        
                 <input
-                        id="searchInput"
-                        type="text"
-                        class="form-control"
-                        placeholder="Search name...">
+                    id="searchInput"
+                    type="text"
+                    class="form-control"
+                    placeholder="Search name...">
 
-                        <select id="filterBarangay" class="form-select">
+                    <select id="filterBarangay" class="form-select">
 
                             <option value="">All Barangay</option>
                             <option value="nagaja">Nagaja</option>
@@ -184,7 +195,7 @@ require "../php/admin_only.php";
                             </table>
 
 
-                            <div class="d-flex justify-content-between mt-2">
+                            <div class="modal-dialog modal-xl modal-fullscreen-md-down modal-dialog-scrollable">
 
                         <div id="recordCount"></div>
 
@@ -208,7 +219,7 @@ require "../php/admin_only.php";
 
         <!-- ADD BENEFICIARY MODAL -->
         <div class="modal fade" id="addModal">
-            <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-dialog modal-fullscreen-md-down modal-xl modal-dialog-scrollable">
                 <div class="modal-content">
 
                 <div class="modal-header">
@@ -435,7 +446,7 @@ require "../php/admin_only.php";
                             <h5 class="mb-3 text-primary">
                                 Family Information
                                 </h5>
-
+                             <div class="table-responsive">
                                 <table class="table table-bordered" id="familyTable">
 
                                 <thead>
@@ -461,6 +472,7 @@ require "../php/admin_only.php";
                                 </tbody>
 
                                 </table>
+                             </div>
 
                                 <button
                                 type="button"
@@ -573,6 +585,30 @@ require "../php/admin_only.php";
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
 <script src="../js/beneficiary.js"></script>
+
+<script>
+
+$("#menuToggle").click(function () {
+
+    $(".sidebar").toggleClass("show");
+
+});
+
+
+// close sidebar when clicking outside (mobile)
+
+$(document).click(function (e) {
+
+    if (
+        !$(e.target).closest(".sidebar").length &&
+        !$(e.target).closest("#menuToggle").length
+    ) {
+        $(".sidebar").removeClass("show");
+    }
+
+});
+
+</script>
 
 </body>
 </html>

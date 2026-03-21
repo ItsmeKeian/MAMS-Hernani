@@ -75,11 +75,22 @@ require "../php/admin_only.php";
     <!-- Main Content -->
     <div class="main-content">
         <!-- Header -->
-        <header class="header">
+         <header class="header">
             <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <h1 class="header-title mb-1">Reports</h1>
-                    <p class="header-subtitle mb-0">Welcome back, Administrator. Here's what's happening today.</p>
+
+                <div class="d-flex align-items-center">
+
+                    <button class="btn btn-outline-primary d-lg-none me-2" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+
+                    <div>
+                        <h1 class="header-title mb-1">Dashboard</h1>
+                        <p class="header-subtitle mb-0">
+                        Welcome back, Administrator. Here's what's happening today.
+                        </p>
+                    </div>
+
                 </div>
                 <div class="d-flex align-items-center">
                     <div class="dropdown">
@@ -108,44 +119,44 @@ require "../php/admin_only.php";
         
 
 
-        <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
 
-                <div>
+            <div class="d-flex flex-wrap gap-2">
                    
                     <a id="exportBtn"
-                    href="php/export/export_beneficiaries.php"
+                    href="../php/export/export_beneficiaries.php"
                     class="btn btn-success">
                     Export Excel
                     </a>
 
                     <a id="printBtn"
-                    href="php/print/print_report.php"
+                    href="../php/print/print_report.php"
                     target="_blank"
-                    class="btn btn-primary">
+                    class="btn btn-primary ">
                     Print Report
                     </a>
 
                 </div>
 
-                <div class="d-flex gap-2">
+                <div class="d-flex flex-wrap gap-2">
 
                         <input
                             type="date"
                             id="dateFrom"
-                            class="form-control">
+                            class="form-control" style="width:150px">
 
                         <input
                             type="date"
                             id="dateTo"
-                            class="form-control">
+                            class="form-control" style="width:150px">
 
                 <input
                         id="searchInput"
                         type="text"
                         class="form-control"
-                        placeholder="Search name...">
+                        placeholder="Search name..." style="width:150px">
 
-                        <select id="filterBarangay" class="form-select">
+                        <select id="filterBarangay" class="form-select" style="width:150px">
 
                             <option value="">All Barangay</option>
                             <option value="nagaja">Nagaja</option>
@@ -155,7 +166,7 @@ require "../php/admin_only.php";
                          </select>
 
 
-                         <select id="filterDamage" class="form-select">
+                         <select id="filterDamage" class="form-select" style="width:150px">
 
                             <option value="">All Damage</option>
                             <option value="Partially Damage">Partially Damage</option>
@@ -320,5 +331,28 @@ require "../php/admin_only.php";
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
 <script src="../js/reports.js"></script>
 
+<script>
+
+$("#menuToggle").click(function () {
+
+    $(".sidebar").toggleClass("show");
+
+});
+
+
+// close sidebar when clicking outside (mobile)
+
+$(document).click(function (e) {
+
+    if (
+        !$(e.target).closest(".sidebar").length &&
+        !$(e.target).closest("#menuToggle").length
+    ) {
+        $(".sidebar").removeClass("show");
+    }
+
+});
+
+</script>
 </body>
 </html>

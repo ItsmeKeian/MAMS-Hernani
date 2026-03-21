@@ -244,4 +244,197 @@ body {
     border-radius: 10px;
 }
 
+@media (max-width: 768px) {
 
+    .page-content {
+        padding: 1rem;
+    }
+
+    .header {
+        padding: 1rem;
+    }
+
+    .stat-card {
+        height: auto;
+        padding: 1.2rem;
+    }
+
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+
+@media (max-width: 992px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.show {
+        transform: translateX(0);
+    }
+}
+
+@media (max-width: 992px) {
+
+    .sidebar {
+        z-index: 1050;
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    .table-container {
+        overflow-x: auto;
+    }
+
+    .table {
+        min-width: 900px;
+    }
+
+}
+
+#familyTable {
+    min-width: 900px;
+}
+
+@media (max-width: 768px) {
+
+    .row > div {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+}
+
+@media (max-width: 576px) {
+
+    .page-content .btn {
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .table-container {
+        overflow-x: auto;
+    }
+
+    .table-container .table {
+        min-width: 900px;
+    }
+
+    
+
+}
+
+
+@media (max-width: 768px) {
+
+    .table-container {
+        overflow-x: auto;
+    }
+
+    .table-container .table {
+        min-width: 700px;
+    }
+
+}
+
+.table td .btn {
+    white-space: nowrap;
+}
+
+.table td:first-child {
+    min-width: 180px;
+}
+
+
+@media (max-width: 576px) {
+
+    .pagination {
+        flex-wrap: wrap;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .modal-body {
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .modal .row > div {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+}
+
+#familyTable {
+    min-width: 900px;
+}
+
+@media (max-width: 576px) {
+
+    .modal-footer .btn {
+        width: 100%;
+    }
+
+}
+
+.modal-header h5 {
+    font-size: 1rem;
+}
+
+
+@media (max-width: 768px) {
+
+    .stat-card {
+        height: auto;
+        padding: 1rem;
+    }
+
+}
+
+
+@media (max-width: 576px) {
+
+    .modal-body .form-control {
+        font-size: 14px;
+    }
+
+}
+
+
+#reportCards .card {
+
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 12px;
+    border: 1px solid #ddd;
+
+}
+
+#reportCards .name {
+
+    font-weight: bold;
+    font-size: 16px;
+
+}
+
+#reportCards .rowItem {
+
+    font-size: 13px;
+    margin-top: 3px;
+
+}

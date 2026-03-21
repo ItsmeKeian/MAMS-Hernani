@@ -84,6 +84,8 @@ function loadBeneficiary(page = 1, search = "", barangay = "", from = "", to = "
 
             tbody.empty();
 
+            
+
             if (!res.data || res.data.length == 0) {
 
                 tbody.append(
@@ -379,8 +381,69 @@ $("#filterBarangay, #searchInput, #dateFrom, #dateTo, #filterDamage")
     $("#printBtn").attr(
         "href",
         url
-        .replace("../export/export_beneficiaries.php",
-                "../print/print_report.php")
+        .replace("../php/export/export_beneficiaries.php",
+                "../php/print/print_report.php")
     );
+
+});
+
+
+$("#exportBtn").click(function(e){
+
+    e.preventDefault();
+
+    let url = $(this).attr("href");
+
+    if(!url) return;
+
+    // loading
+    Swal.fire({
+        title: "Preparing Excel...",
+        allowOutsideClick:false,
+        timer:1000,
+        didOpen:()=>{
+            Swal.showLoading();
+        }
+    }).then(()=>{
+
+        // success state
+        Swal.fire({
+            icon: "success",
+            title: "Export ready",
+            timer:1000,
+            showConfirmButton:false
+        }).then(()=>{
+
+            // start download after success
+            window.location.href = url;
+
+        });
+
+    });
+
+});
+
+
+
+$("#printBtn").click(function(e){
+
+    e.preventDefault();
+
+    let url = $(this).attr("href");
+
+    if(!url) return;
+
+    Swal.fire({
+        title: "Preparing report...",
+        allowOutsideClick:false,
+        timer:1200,
+        didOpen:()=>{
+            Swal.showLoading();
+        }
+    }).then(()=>{
+
+        window.open(url, "_blank");
+
+    });
 
 });

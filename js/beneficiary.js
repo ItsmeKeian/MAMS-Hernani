@@ -17,14 +17,27 @@ $("#saveBeneficiary").click(function () {
 
             if (res.status == 1) {
 
+                // loading state
                 Swal.fire({
-                    icon: "success",
-                    title: "Saved",
+                    title: "Saving...",
+                    allowOutsideClick: false,
                     timer: 1200,
-                    showConfirmButton: false
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
                 }).then(() => {
 
-                    location.reload();
+                    // success state
+                    Swal.fire({
+                        icon: "success",
+                        title: "Saved successfully",
+                        timer: 1200,
+                        showConfirmButton: false
+                    }).then(() => {
+
+                        location.reload();
+
+                    });
 
                 });
 
@@ -135,36 +148,52 @@ $(document).on("click", ".delete", function () {
 
     Swal.fire({
         title: "Delete?",
+        text: "This record will be removed",
         icon: "warning",
-        showCancelButton: true
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete"
     }).then((r) => {
 
         if (!r.isConfirmed) return;
 
-        $.post(
-            "../php/delete/delete_beneficiary.php",
-            { id: id },
-            function (res) {
+        $.ajax({
+
+            url: "../php/delete/delete_beneficiary.php",
+            type: "POST",
+            data: { id: id },
+            dataType: "json",
+
+            success: function (res) {
 
                 if (res.status == 1) {
 
+                    // loading
                     Swal.fire({
                         title: "Deleting...",
+                        allowOutsideClick: false,
                         timer: 1200,
-                        didOpen: () => Swal.showLoading()
-                    });
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    }).then(() => {
 
-                    setTimeout(() => {
+                        // success
+                        Swal.fire({
+                            icon: "success",
+                            title: "Deleted successfully",
+                            timer: 1200,
+                            showConfirmButton: false
+                        });
 
                         loadBeneficiary(currentPage);
 
-                    }, 1200);
+                    });
 
                 }
 
-            },
-            "json"
-        );
+            }
+
+        });
 
     });
 
