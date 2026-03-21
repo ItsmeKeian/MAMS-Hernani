@@ -212,6 +212,18 @@ require "../php/admin_only.php";
                     </div>
 
                     <div class="mb-2">
+                        <label>Role</label>
+
+                        <select name="role" class="form-control">
+                            <option value=""></option>
+                            <option value="user">User</option>
+                            <option value="admin">Admin</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="mb-2">
                         <label>Password</label>
                         <input type="password" name="password" class="form-control">
                     </div>
@@ -235,6 +247,68 @@ require "../php/admin_only.php";
             </div>
         </div>
 </div>
+
+
+    <div class="modal fade" id="editUser">
+
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5>Edit User</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <form id="editForm">
+
+                    <input type="hidden" name="id" id="edit_id">
+
+                    <div class="mb-2">
+                        <label>Name</label>
+                        <input type="text" name="name" id="edit_name" class="form-control">
+                    </div>
+
+                    <div class="mb-2">
+                        <label>Username</label>
+                        <input type="text" name="username" id="edit_username" class="form-control">
+                    </div>
+
+                    <div class="mb-2">
+                        <label>Email</label>
+                        <input type="text" name="email" id="edit_email" class="form-control">
+                    </div>
+
+                    <div class="mb-2">
+                        <label>New Password</label>
+                        <input type="password" name="password" id="edit_password" class="form-control">
+                    </div>
+
+                    <div class="mb-2">
+                        <label>Confirm Password</label>
+                        <input type="password" id="edit_confirm" class="form-control">
+                    </div>
+
+                    </form>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cancel
+                    </button>
+
+                    <button class="btn btn-primary" id="updateUser">
+                    Update
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 
 
