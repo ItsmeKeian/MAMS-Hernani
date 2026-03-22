@@ -173,9 +173,19 @@ require "../php/admin_only.php";
                         <select id="filterBarangay" class="form-select" style="width:150px">
 
                             <option value="">All Barangay</option>
-                            <option value="nagaja">Nagaja</option>
-                            <option value="padang">Padang</option>
-                            <option value="poblacion">Poblacion</option>
+                            <option value="Poblacion 01">Poblacion 01</option>
+                            <option value="Poblacion 02">Poblacion 02</option>
+                            <option value="Poblacion 03">Poblacion 03</option>
+                            <option value="Poblacion 04">Poblacion 04</option>
+                            <option value="Canciledes">Canciledes</option>
+                            <option value="Padang">Padang</option>
+                            <option value="Nagaja">Nagaja</option>
+                            <option value="Carmen">Carmen</option>
+                            <option value="San Isidro">San Isidro</option>
+                            <option value="Batang">Batang</option>
+                            <option value="Garawon">Garawon</option>
+                            <option value="Cacatmonan">Cacatmonan</option>
+                            <option value="San Miguel">San Miguel</option>
 
                          </select>
 

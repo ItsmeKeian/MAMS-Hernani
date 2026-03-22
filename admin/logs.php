@@ -166,49 +166,85 @@ require "../php/admin_only.php";
         <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="mb-0">
                 <i class="fas fa-list me-2 text-gold"></i>
-                Logs
+                User Activity Logs
             </h5>
         </div>
 
 
         <div class="table-responsive">
 
-        <table id="beneficiaryTable" class="table">
+            <table id="logsTable" class="table table-hover">
 
                 <thead>
 
-                        <tr>
+                    <tr>
 
-                                <th>Name</th>
-                                <th>Address</th>
-                                <th>Age</th>
-                                <th>Contact</th>
-                                <th>Occupation</th>
-                                <th>Ownership</th>
-                                <th>Damage</th>
-                                <th>Date</th>
-                                <th>Action</th>
+                        <th>#</th>
+                        <th>Date</th>
+                        <th>User</th>
+                        <th>Action</th>
+                        <th>Module</th>
+                        <th>Details</th>
 
-                        </tr>
+                    </tr>
 
                 </thead>
 
-            <tbody>
+                <tbody>
 
-            </tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>2026-03-23</td>
+                        <td>user1</td>
+                        <td>
+                            <span class="badge bg-success">
+                                Added
+                            </span>
+                        </td>
+                        <td>Assistance</td>
+                        <td>Added new assistance record</td>
+                    </tr>
+
+                    <tr>
+                        <td>2</td>
+                        <td>2026-03-23</td>
+                        <td>user2</td>
+                        <td>
+                            <span class="badge bg-warning text-dark">
+                                Updated
+                            </span>
+                        </td>
+                        <td>Beneficiary</td>
+                        <td>Edited beneficiary info</td>
+                    </tr>
+
+                    <tr>
+                        <td>3</td>
+                        <td>2026-03-23</td>
+                        <td>user1</td>
+                        <td>
+                            <span class="badge bg-danger">
+                                Deleted
+                            </span>
+                        </td>
+                        <td>Records</td>
+                        <td>Deleted record</td>
+                    </tr>
+
+                </tbody>
 
             </table>
 
 
             <div class="d-flex justify-content-between mt-2">
 
-        <div id="recordCount"></div>
+                <div id="recordCount"></div>
 
-        </div>
+            </div>
 
-        <ul class="pagination justify-content-center"></ul>
+            <ul class="pagination justify-content-center"></ul>
 
-        </div>
+            </div>
 
     </div>
 
@@ -227,7 +263,7 @@ require "../php/admin_only.php";
 <script src="../assets/js/jquery-4.0.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
-<script src="../js/.js"></script>
+<script src="../js/logs.js"></script>
 
 <script>
 

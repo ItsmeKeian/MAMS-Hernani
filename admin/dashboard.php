@@ -132,8 +132,8 @@ require "../php/admin_only.php";
                             <i class="fas fa-users"></i>
                         </div>
                         <div>
-                            <h3 class="stat-number">1,247</h3>
-                            <p class="stat-label">Total Beneficiaries</p>
+                            <h3 id="totalBen" class="stat-number">0</h3>
+                            <p class="stat-label">Total Registered Beneficiaries</p>
                         </div>
                     </div>
                 </div>
@@ -143,8 +143,8 @@ require "../php/admin_only.php";
                             <i class="fas fa-box"></i>
                         </div>
                         <div>
-                            <h3 class="stat-number">892</h3>
-                            <p class="stat-label">Aid Packages</p>
+                            <h3 id="totalAid" class="stat-number">0</h3>
+                            <p class="stat-label">Total Assistance Records</p>
                         </div>
                     </div>
                 </div>
@@ -154,124 +154,90 @@ require "../php/admin_only.php";
                             <i class="fas fa-check-circle"></i>
                         </div>
                         <div>
-                            <h3 class="stat-number">756</h3>
-                            <p class="stat-label">Distributed</p>
+                            <h3 id="totalQty" class="stat-number">0</h3>
+                            <p class="stat-label">Total Quantity Released</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="stat-card red">
                         <div class="stat-icon">
-                            <i class="fas fa-clock"></i>
+                            <i class="fas fa-coins"></i>
                         </div>
                         <div>
-                            <h3 class="stat-number">136</h3>
-                            <p class="stat-label">Pending</p>
+                            <h3 id="totalCost" class="stat-number">0</h3>
+                            <p class="stat-label">Total Assistance Cost</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Recent Records & Summary Cards -->
-            <div class="row g-4">
-                <!-- Recent Aid Distribution -->
-                <div class="col-12">
-                    <div class="table-container">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0"><i class="fas fa-list me-2 text-gold"></i>Recent Aid Distribution</h5>
-                            <a href="#" class="btn btn-sm btn-outline-primary">View All <i class="fas fa-arrow-right ms-1"></i></a>
+             <!-- Charts Row -->
+                <div class="row g-4">
+
+                <!-- Chart 1 -->
+                <div class="col-lg-6">
+                    <div class="card p-3">
+                        <h5>Beneficiaries per Barangay</h5>
+
+                        <div style="height:300px">
+                            <canvas id="brgyChart"></canvas>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table mb-0">
-                                <thead>
-                                    <tr>
-                                        <th>Beneficiary</th>
-                                        <th>Aid Type</th>
-                                        <th>Date</th>
-                                        <th>Amount</th>
-                                        <th>Status</th>
-                                        <th>Barangay</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 36px; height: 36px; font-size: 0.85rem;">
-                                                    JR
-                                                </div>
-                                                <div>
-                                                    <div class="fw-semibold">Juan R. Santos</div>
-                                                    <small class="text-muted">ID: BEN-001247</small>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td><span class="fw-semibold">Food Pack</span></td>
-                                        <td>2024-01-15</td>
-                                        <td>₱2,500</td>
-                                        <td><span class="badge badge-completed"><i class="fas fa-check me-1"></i>Completed</span></td>
-                                        <td>Barangay 1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar bg-success text-white rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 36px; height: 36px; font-size: 0.85rem;">
-                                                    MP
-                                                </div>
-                                                <div>
-                                                    <div class="fw-semibold">Maria P. Reyes</div>
-                                                    <small class="text-muted">ID: BEN-001246</small>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td><span class="fw-semibold">Financial Aid</span></td>
-                                        <td>2024-01-14</td>
-                                        <td>₱5,000</td>
-                                        <td><span class="badge badge-approved"><i class="fas fa-check-circle me-1"></i>Approved</span></td>
-                                        <td>Barangay 5</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar bg-warning text-dark rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 36px; height: 36px; font-size: 0.85rem;">
-                                                    AG
-                                                </div>
-                                                <div>
-                                                    <div class="fw-semibold">Ana G. Lopez</div>
-                                                    <small class="text-muted">ID: BEN-001245</small>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td><span class="fw-semibold">Medical Aid</span></td>
-                                        <td>2024-01-13</td>
-                                        <td>₱3,200</td>
-                                        <td><span class="badge badge-pending"><i class="fas fa-clock me-1"></i>Pending</span></td>
-                                        <td>Barangay 3</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar bg-info text-white rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 36px; height: 36px; font-size: 0.85rem;">
-                                                    PC
-                                                </div>
-                                                <div>
-                                                    <div class="fw-semibold">Pedro C. Garcia</div>
-                                                    <small class="text-muted">ID: BEN-001244</small>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td><span class="fw-semibold">Food Pack</span></td>
-                                        <td>2024-01-12</td>
-                                        <td>₱2,500</td>
-                                        <td><span class="badge badge-completed"><i class="fas fa-check me-1"></i>Completed</span></td>
-                                        <td>Barangay 7</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        </div>
+
                     </div>
                 </div>
+
+                <!-- Chart 2 -->
+                <div class="col-lg-6">
+                    <div class="card p-3">
+                        <h5>Aid Distribution per Month</h5>
+
+                        <div style="height:300px">
+                            <canvas id="monthChart"></canvas>
+                        </div>
+
+                    </div>
+                </div>
+
+                </div>
+
+
+                <!-- Full Width Chart -->
+                <div class="row g-4 mt-1">
+
+                <!-- Items -->
+                <div class="col-lg-6">
+
+                    <div class="card p-3">
+
+                        <h5>Items Distribution</h5>
+
+                        <div style="height:300px">
+                            <canvas id="itemsChart"></canvas>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Disaster -->
+                <div class="col-lg-6">
+
+                    <div class="card p-3">
+
+                        <h5>Assistance per Disaster Type</h5>
+
+                        <div style="height:300px">
+                            <canvas id="disasterChart"></canvas>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                </div>
+           
             </div>
 
         </div> <!-- page-content -->
@@ -280,6 +246,8 @@ require "../php/admin_only.php";
     
 <script src="../assets/js/jquery-4.0.0.min.js"></script>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="../js/dashboard.js"></script>
 
 <script>
 
