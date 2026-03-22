@@ -303,7 +303,7 @@ require "../php/admin_only.php";
                                 <th>Quantity</th>
                                 <th>Cost</th>
                                 <th>Provider</th>
-                                <th>Date</th>
+                                <th>Date Received</th>
                                
                         </tr>
 
