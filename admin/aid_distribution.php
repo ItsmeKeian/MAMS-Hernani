@@ -75,6 +75,7 @@ require "../php/admin_only.php";
                         Settings
                     </a>
                 </li>
+
                 <li class="nav-item mt-auto">
                     <a class="nav-link" href="../php/logout.php">
                         <i class="fas fa-sign-out-alt"></i>
@@ -82,14 +83,13 @@ require "../php/admin_only.php";
                     </a>
                 </li>
             </ul>
-
         </nav>
     </div>
 
     <!-- Main Content -->
     <div class="main-content">
         <!-- Header -->
-        <header class="header">
+         <header class="header">
             <div class="d-flex justify-content-between align-items-center">
 
                 <div class="d-flex align-items-center">
@@ -123,27 +123,54 @@ require "../php/admin_only.php";
             </div>
         </header>
 
+
+        
+
         <!-- Page Content -->
         <div class="page-content">
 
 
-        <div class="d-flex justify-content-between align-items-center mb-3">
+        
 
-                <div>
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
-                        <i class="fas fa-user-plus"></i> Add Distribution
-                    </button>
+
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+
+            <div class="d-flex flex-wrap gap-2">
+                   
+                    <a id="exportBtn"
+                    href="../php/export/export_beneficiaries.php"
+                    class="btn btn-success">
+                    Export Excel
+                    </a>
+
+                    <a id="printBtn"
+                    href="../php/print/print_report.php"
+                    target="_blank"
+                    class="btn btn-primary ">
+                    Print Report
+                    </a>
+
                 </div>
 
-                <div class="d-flex gap-2">
+                <div class="d-flex flex-wrap gap-2">
+
+                        <input
+                            type="date"
+                            id="dateFrom"
+                            class="form-control" style="width:150px">
+
+                        <input
+                            type="date"
+                            id="dateTo"
+                            class="form-control" style="width:150px">
 
                 <input
                         id="searchInput"
                         type="text"
                         class="form-control"
-                        placeholder="Search name...">
+                        placeholder="Search name..." style="width:150px">
 
-                        <select id="filterBarangay" class="form-select">
+                        <select id="filterBarangay" class="form-select" style="width:150px">
 
                             <option value="">All Barangay</option>
                             <option value="nagaja">Nagaja</option>
@@ -152,9 +179,94 @@ require "../php/admin_only.php";
 
                          </select>
 
+
+                         <select id="filterDamage" class="form-select" style="width:150px">
+
+                            <option value="">All Damage</option>
+                            <option value="Partially Damage">Partially Damage</option>
+                            <option value="Totally Damage">Totally Damage</option>
+
+                            </select>
+
+                        
+
                 </div>
 
             </div>
+
+
+            <div class="row g-4 mb-4">
+
+            <!-- TOTAL -->
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card blue">
+
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+
+                    <div>
+                        <h3 id="totalCount" class="stat-number">0</h3>
+                        <p class="stat-label">Total Beneficiaries</p>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- PARTIAL -->
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card yellow">
+
+                    <div class="stat-icon">
+                        <i class="fas fa-house-damage"></i>
+                    </div>
+
+                    <div>
+                        <h3 id="partialCount" class="stat-number">0</h3>
+                        <p class="stat-label">Partial Damage</p>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- TOTAL DAMAGE -->
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card red">
+
+                    <div class="stat-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+
+                    <div>
+                        <h3 id="totalDamageCount" class="stat-number">0</h3>
+                        <p class="stat-label">Total Damage</p>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- 4PS -->
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card green">
+
+                    <div class="stat-icon">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+
+                    <div>
+                        <h3 id="fourpsCount" class="stat-number">0</h3>
+                        <p class="stat-label">4Ps Beneficiaries</p>
+                    </div>
+
+                </div>
+            </div>
+
+            </div>
+
+            
             <!-- Stats Cards Row -->
            
 
@@ -183,16 +295,16 @@ require "../php/admin_only.php";
 
                         <tr>
 
-                                <th>Name</th>
-                                <th>Address</th>
-                                <th>Age</th>
-                                <th>Contact</th>
-                                <th>Occupation</th>
-                                <th>Ownership</th>
-                                <th>Damage</th>
+                                
+                                <th>Name Received</th>
+                                <th>Disaster</th>
+                                <th>Assistance</th>
+                                <th>Unit</th>
+                                <th>Quantity</th>
+                                <th>Cost</th>
+                                <th>Provider</th>
                                 <th>Date</th>
-                                <th>Action</th>
-
+                               
                         </tr>
 
                 </thead>
@@ -221,17 +333,18 @@ require "../php/admin_only.php";
 </div>
                     
 
-        </div> <!-- page-content -->
+</div> <!-- page-content -->
+</div> <!-- main-content -->
 
-    </div> <!-- main-content -->
 
-
+ 
+<!-- 50% -->
 
 
 <script src="../assets/js/jquery-4.0.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
-<script src="../js/.js"></script>
+<script src="../js/aid_distribution.js"></script>
 
 <script>
 

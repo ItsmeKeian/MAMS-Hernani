@@ -55,8 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $account_type = $_POST["account_type"];
     $account_number = $_POST["account_number"];
 
-    $ownership = $_POST["ownership"];
-    $damage = $_POST["damage"];
+    $ownership = $_POST["ownership"] ?? null;
+    $damage = $_POST["damage"] ?? null;
 
     $date_registered = $_POST["date_registered"];
 
@@ -186,6 +186,68 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         }
 
+    }
+
+
+
+// ========================
+// SAVE ASSISTANCE
+// ========================
+
+if (isset($_POST["aid_date"])) {
+
+    $dates = $_POST["aid_date"];
+    $receiving = $_POST["aid_receiving"];
+    $disaster = $_POST["aid_disaster"];
+    $type = $_POST["aid_type"];
+    $unit = $_POST["aid_unit"];
+    $qty = $_POST["aid_qty"];
+    $cost = $_POST["aid_cost"];
+    $provider = $_POST["aid_provider"];
+    
+    
+    for ($i = 0; $i < count($dates); $i++) {
+    
+    if ($dates[$i] == "") continue;
+    
+    $sql3 = "
+    
+    INSERT INTO assistance_records
+    (
+    beneficiary_id,
+    date_received,
+    receiving_name,
+    disaster_type,
+    assistance_type,
+    unit,
+    quantity,
+    cost,
+    provider
+    )
+    
+    VALUES (?,?,?,?,?,?,?,?,?)
+    
+    ";
+    
+    $stmt3 = $conn->prepare($sql3);
+    
+    $stmt3->execute([
+    
+    $beneficiary_id,
+    $dates[$i],
+    $receiving[$i],
+    $disaster[$i],
+    $type[$i],
+    $unit[$i],
+    $qty[$i],
+    $cost[$i],
+    $provider[$i]
+   
+    
+    ]);
+    
+    }
+    
     }
 
 

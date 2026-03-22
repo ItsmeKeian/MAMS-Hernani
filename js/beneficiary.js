@@ -123,6 +123,67 @@ $(document).on("click", ".removeRow", function(){
 });
 
 
+// =============================
+// Assistance receive
+// =============================
+
+$("#addAidRow").click(function () {
+
+    $("#aidTable tbody").append(`
+    
+    <tr>
+    
+    <td>
+    <input type="date" name="aid_date[]" class="form-control">
+    </td>
+    
+    <td>
+    <input type="text" name="aid_receiving[]" class="form-control">
+    </td>
+    
+    <td>
+    <input type="text" name="aid_disaster[]" class="form-control">
+    </td>
+    
+    <td>
+    <input type="text" name="aid_type[]" class="form-control">
+    </td>
+    
+    <td>
+    <input type="text" name="aid_unit[]" class="form-control">
+    </td>
+    
+    <td>
+    <input type="number" name="aid_qty[]" class="form-control">
+    </td>
+    
+    <td>
+    <input type="number" name="aid_cost[]" class="form-control">
+    </td>
+    
+    <td>
+    <input type="text" name="aid_provider[]" class="form-control">
+    </td>
+    
+    
+    <td>
+    <button type="button" class="btn btn-danger removeRow">X</button>
+    </td>
+    
+    </tr>
+    
+    `);
+    
+    });
+    
+    
+    $(document).on("click",".removeRow",function(){
+    
+    $(this).closest("tr").remove();
+    
+    });
+
+
 
 
 
@@ -261,7 +322,7 @@ function loadBeneficiary(page = 1, search = "", barangay = "") {
                 let f = b.last_name?.charAt(0) || "";
                 let l = b.first_name?.charAt(0) || "";
 
-                let initials = f + l;
+                let initials = (f + l).toUpperCase();
 
                 tbody.append(`
 

@@ -64,7 +64,7 @@ function loadBeneficiary(page = 1, search = "", barangay = "", from = "", to = "
 
         type: "POST",
 
-        url: "../php/retrieve/retrieve_beneficiary.php",
+        url: "../php/retrieve/retrieve_aid_distribution.php",
 
         data: {
             page: page,
@@ -102,10 +102,14 @@ function loadBeneficiary(page = 1, search = "", barangay = "", from = "", to = "
 
             $.each(res.data, function (i, b) {
 
-                let f = b.last_name?.charAt(0) || "";
-                let l = b.first_name?.charAt(0) || "";
+                let name = b.receiving_name || "";
 
-                let initials = (f + l).toUpperCase();
+                let parts = name.split(" ");
+
+                let initials = (
+                    (parts[0]?.charAt(0) || "") +
+                    (parts[1]?.charAt(0) || "")
+                ).toUpperCase();
 
                 tbody.append(`
 
@@ -127,7 +131,7 @@ function loadBeneficiary(page = 1, search = "", barangay = "", from = "", to = "
 
                                     <div class="fw-semibold">
 
-                                        ${b.last_name} ${b.first_name}
+                                        ${b.receiving_name}
 
                                      </div>
 
@@ -138,20 +142,20 @@ function loadBeneficiary(page = 1, search = "", barangay = "", from = "", to = "
                         </td>
 
                         <td>
-                            ${b.house_no} ${b.addr_barangay}
+                            ${b.disaster_type} 
                         </td>
 
-                        <td>${b.age}</td>
+                        <td>${b.assistance_type}</td>
 
-                        <td>${b.contact_number}</td>
+                        <td>${b.unit}</td>
 
-                        <td>${b.occupation}</td>
+                        <td>${b.quantity}</td>
 
-                        <td>${b.ownership}</td>
+                        <td>${b.cost}</td>
 
-                         <td>${b.damage_classification}</td>
+                         <td>${b.provider}</td>
 
-                         <td>${b.date_registered}</td>
+                         <td>${b.date_received}</td>
 
                      
 

@@ -563,7 +563,48 @@ require "../php/admin_only.php";
                         </div>
 
 
-                            <hr>
+                        <hr>
+
+                        <h5 class="mb-3 text-primary">
+                        Assistance Received
+                        </h5>
+
+                        <div class="table-responsive">
+
+                        <table class="table table-bordered" id="aidTable">
+
+                        <thead>
+                        <tr>
+
+                        <th>Date</th>
+                        <th>Receiving</th>
+                        <th>Disaster</th>
+                        <th>Assistance</th>
+                        <th>Unit</th>
+                        <th>Qty</th>
+                        <th>Cost</th>
+                        <th>Provider</th>
+                        <th></th>
+
+                        </tr>
+                        </thead>
+
+                        <tbody></tbody>
+
+                        </table>
+
+                        </div>
+
+                        <button
+                        type="button"
+                        class="btn btn-sm btn-primary"
+                        id="addAidRow">
+
+                        Add Assistance
+
+                        </button>
+
+                        <hr>
 
                             <div class="col-md-12 mb-3">
                                 <label>Date Registered</label>
