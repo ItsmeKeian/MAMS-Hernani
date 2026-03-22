@@ -308,8 +308,14 @@ foreach ($beneficiaries as $b) {
 <td></td><td></td><td></td><td></td>
 <td></td><td></td><td></td><td></td>
 
-<td></td><td></td><td></td><td></td>
-<td></td><td></td><td></td><td></td>
+<td>".($assistance['date_received'] ?? '')."</td>
+<td>".($assistance['receiving_name'] ?? '')."</td>
+<td>".($assistance['disaster_type'] ?? '')."</td>
+<td>".($assistance['assistance_type'] ?? '')."</td>
+<td>".($assistance['unit'] ?? '')."</td>
+<td>".($assistance['quantity'] ?? '')."</td>
+<td>".($assistance['cost'] ?? '')."</td>
+<td>".($assistance['provider'] ?? '')."</td>
 
 </tr>";
 
