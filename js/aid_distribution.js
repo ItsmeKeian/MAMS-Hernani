@@ -1,19 +1,18 @@
 
 
 
-function loadSummary(search, barangay, from, to, damage) {
+function loadSummary(search, barangay, from, to) {
 
     $.ajax({
 
         type: "POST",
-        url: "../php/retrieve/retrieve_summary.php",
+        url: "../php/retrieve/retrieve_aid_summary.php",
 
         data: {
             search: search,
             barangay: barangay,
             from: from,
-            to: to,
-            damage: damage
+            to: to
         },
 
         dataType: "json",
@@ -21,9 +20,9 @@ function loadSummary(search, barangay, from, to, damage) {
         success: function (res) {
 
             $("#totalCount").text(res.total);
-            $("#partialCount").text(res.partial);
-            $("#totalDamageCount").text(res.totalDamage);
-            $("#fourpsCount").text(res.fourps);
+            $("#qtyCount").text(res.qty);
+            $("#costCount").text(res.cost);
+            $("#beneficiaryCount").text(res.beneficiaries);
 
         }
 
@@ -46,19 +45,19 @@ $(function () {
     let barangay = "";
     let from = "";
     let to = "";
-    let damage = "";
+    
 
-    loadBeneficiary(1, search, barangay, from, to, damage);
+    loadBeneficiary(1, search, barangay, from, to);
 
 });
 
 
 
-function loadBeneficiary(page = 1, search = "", barangay = "", from = "", to = "", damage = "") {
+function loadBeneficiary(page = 1, search = "", barangay = "", from = "", to = "") {
 
     currentPage = page;
 
-    loadSummary(search, barangay, from, to, damage);
+    loadSummary(search, barangay, from, to);
 
     $.ajax({
 
@@ -73,7 +72,7 @@ function loadBeneficiary(page = 1, search = "", barangay = "", from = "", to = "
             barangay: barangay,
             from: from,
             to: to,
-            damage: damage
+            
         },
 
         dataType: "json",
@@ -293,9 +292,9 @@ $("#dateFrom, #dateTo").on("change", function () {
     let barangay = $("#filterBarangay").val();
     let from = $("#dateFrom").val();
     let to = $("#dateTo").val();
-    let damage = $("#filterDamage").val();
+   
 
-    loadBeneficiary(1, search, barangay, from, to, damage);
+    loadBeneficiary(1, search, barangay, from, to);
 
 });
 
@@ -307,9 +306,9 @@ $("#searchInput").on("input", function () {
     let barangay = $("#filterBarangay").val();
     let from = $("#dateFrom").val();
     let to = $("#dateTo").val();
-    let damage = $("#filterDamage").val();
+    
 
-    loadBeneficiary(1, search, barangay, from, to, damage);
+    loadBeneficiary(1, search, barangay, from, to);
 
 });
 
@@ -321,38 +320,27 @@ $("#filterBarangay").on("change", function () {
     let barangay = $(this).val();
     let from = $("#dateFrom").val();
     let to = $("#dateTo").val();
-    let damage = $("#filterDamage").val();
+    
 
-    loadBeneficiary(1, search, barangay, from, to, damage);
-
-});
-
-// filter damage
-$("#filterDamage").on("change", function () {
-
-    let search = $("#searchInput").val();
-    let barangay = $("#filterBarangay").val();
-    let from = $("#dateFrom").val();
-    let to = $("#dateTo").val();
-    let damage = $(this).val();
-
-    loadBeneficiary(1, search, barangay, from, to, damage);
+    loadBeneficiary(1, search, barangay, from, to);
 
 });
+
+
 
 
 // EXPORT FILTER (search + barangay + date)
 
-$("#filterBarangay, #searchInput, #dateFrom, #dateTo, #filterDamage")
+$("#filterBarangay, #searchInput, #dateFrom, #dateTo")
 .on("change input", function(){
 
     let brgy = $("#filterBarangay").val();
     let search = $("#searchInput").val();
     let from = $("#dateFrom").val();
     let to = $("#dateTo").val();
-    let damage = $("#filterDamage").val();
+   
 
-    let url = "../php/export/export_beneficiaries.php";
+    let url = "../php/export/export_aid_distribution.php";
 
     let params = [];
 
@@ -372,9 +360,7 @@ $("#filterBarangay, #searchInput, #dateFrom, #dateTo, #filterDamage")
         params.push("to=" + to);
     }
 
-    if(damage !== ""){
-        params.push("damage=" + damage);
-    }
+   
 
     if(params.length > 0){
         url += "?" + params.join("&");
@@ -385,8 +371,8 @@ $("#filterBarangay, #searchInput, #dateFrom, #dateTo, #filterDamage")
     $("#printBtn").attr(
         "href",
         url
-        .replace("../php/export/export_beneficiaries.php",
-                "../php/print/print_report.php")
+        .replace("../php/export/export_aid_distribution.php",
+                "../php/print/print_aid_distribution.php")
     );
 
 });

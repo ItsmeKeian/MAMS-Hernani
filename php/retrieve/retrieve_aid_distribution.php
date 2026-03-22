@@ -4,66 +4,61 @@ require "../dbconnect.php";
 
 $page = $_POST["page"] ?? 1;
 $limit = $_POST["limit"] ?? 5;
+
 $search = $_POST["search"] ?? "";
 $barangay = $_POST["barangay"] ?? "";
 $from = $_POST["from"] ?? "";
 $to = $_POST["to"] ?? "";
-$damage = $_POST["damage"] ?? "";
 
 $start = ($page - 1) * $limit;
 
-
-// =====================
-// BUILD WHERE
-// =====================
 
 $where = [];
 $params = [];
 
 
+// SEARCH
+
 if ($search != "") {
 
-    $where[] = "(b.last_name LIKE :search OR b.first_name LIKE :search)";
+    $where[] = "a.receiving_name LIKE :search";
     $params["search"] = "%$search%";
 
 }
 
+
+// BARANGAY (from beneficiaries)
+
 if ($barangay != "") {
 
-    $where[] = "addr_barangay = :barangay";
+    $where[] = "b.addr_barangay = :barangay";
     $params["barangay"] = $barangay;
 
 }
 
+
+// DATE
+
 if ($from != "" && $to != "") {
 
-    $where[] = "date_registered BETWEEN :from AND :to";
+    $where[] = "a.date_received BETWEEN :from AND :to";
 
     $params["from"] = $from;
     $params["to"] = $to;
 
 }
 
-if ($damage != "") {
-
-    $where[] = "damage_classification = :damage";
-    $params["damage"] = $damage;
-
-}
-
 
 $whereSql = "";
 
-if (count($where) > 0) {
+if ($where) {
 
     $whereSql = "WHERE " . implode(" AND ", $where);
 
 }
 
 
-// =====================
 // COUNT
-// =====================
 
 $totalSql = "
 
@@ -80,9 +75,9 @@ $whereSql
 
 $totalStmt = $conn->prepare($totalSql);
 
-foreach ($params as $key => $val) {
+foreach ($params as $k => $v) {
 
-    $totalStmt->bindValue(":$key", $val);
+    $totalStmt->bindValue(":$k", $v);
 
 }
 
@@ -91,17 +86,13 @@ $totalStmt->execute();
 $total = $totalStmt->fetchColumn();
 
 
-// =====================
-// GET DATA
-// =====================
+// DATA
 
 $sql = "
 
 SELECT 
-
 a.*,
-b.last_name,
-b.first_name
+b.addr_barangay
 
 FROM assistance_records a
 
@@ -118,9 +109,9 @@ LIMIT $start, $limit
 
 $stmt = $conn->prepare($sql);
 
-foreach ($params as $key => $val) {
+foreach ($params as $k => $v) {
 
-    $stmt->bindValue(":$key", $val);
+    $stmt->bindValue(":$k", $v);
 
 }
 
@@ -128,10 +119,6 @@ $stmt->execute();
 
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-
-// =====================
-// RESPONSE
-// =====================
 
 echo json_encode([
 

@@ -138,13 +138,13 @@ require "../php/admin_only.php";
             <div class="d-flex flex-wrap gap-2">
                    
                     <a id="exportBtn"
-                    href="../php/export/export_beneficiaries.php"
+                    href="../php/export/export_aid_distribution.php"
                     class="btn btn-success">
                     Export Excel
                     </a>
 
                     <a id="printBtn"
-                    href="../php/print/print_report.php"
+                    href="../php/print/print_aid_distribution.php"
                     target="_blank"
                     class="btn btn-primary ">
                     Print Report
@@ -180,13 +180,7 @@ require "../php/admin_only.php";
                          </select>
 
 
-                         <select id="filterDamage" class="form-select" style="width:150px">
-
-                            <option value="">All Damage</option>
-                            <option value="Partially Damage">Partially Damage</option>
-                            <option value="Totally Damage">Totally Damage</option>
-
-                            </select>
+                       
 
                         
 
@@ -197,58 +191,58 @@ require "../php/admin_only.php";
 
             <div class="row g-4 mb-4">
 
-            <!-- TOTAL -->
+            <!-- Total Distribution -->
             <div class="col-lg-3 col-md-6">
                 <div class="stat-card blue">
 
                     <div class="stat-icon">
-                        <i class="fas fa-users"></i>
+                        <i class="fas fa-clipboard-list"></i>
                     </div>
 
                     <div>
                         <h3 id="totalCount" class="stat-number">0</h3>
-                        <p class="stat-label">Total Beneficiaries</p>
+                        <p class="stat-label">Total Distribution</p>
                     </div>
 
                 </div>
             </div>
 
 
-            <!-- PARTIAL -->
+            <!-- Total Items -->
             <div class="col-lg-3 col-md-6">
                 <div class="stat-card yellow">
 
                     <div class="stat-icon">
-                        <i class="fas fa-house-damage"></i>
+                        <i class="fas fa-boxes"></i>
                     </div>
 
                     <div>
-                        <h3 id="partialCount" class="stat-number">0</h3>
-                        <p class="stat-label">Partial Damage</p>
+                        <h3 id="qtyCount" class="stat-number">0</h3>
+                        <p class="stat-label">Total Items</p>
                     </div>
 
                 </div>
             </div>
 
 
-            <!-- TOTAL DAMAGE -->
+            <!-- Total Cost -->
             <div class="col-lg-3 col-md-6">
                 <div class="stat-card red">
 
                     <div class="stat-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
+                        <i class="fas fa-coins"></i>
                     </div>
 
                     <div>
-                        <h3 id="totalDamageCount" class="stat-number">0</h3>
-                        <p class="stat-label">Total Damage</p>
+                        <h3 id="costCount" class="stat-number">0</h3>
+                        <p class="stat-label">Total Cost</p>
                     </div>
 
                 </div>
             </div>
 
 
-            <!-- 4PS -->
+            <!-- Beneficiaries Served -->
             <div class="col-lg-3 col-md-6">
                 <div class="stat-card green">
 
@@ -257,8 +251,8 @@ require "../php/admin_only.php";
                     </div>
 
                     <div>
-                        <h3 id="fourpsCount" class="stat-number">0</h3>
-                        <p class="stat-label">4Ps Beneficiaries</p>
+                        <h3 id="beneficiaryCount" class="stat-number">0</h3>
+                        <p class="stat-label">Beneficiaries Served</p>
                     </div>
 
                 </div>
