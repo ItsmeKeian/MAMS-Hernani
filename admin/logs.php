@@ -127,30 +127,7 @@ require "../php/admin_only.php";
         <div class="page-content">
 
 
-        <div class="d-flex justify-content-between align-items-center mb-3">
-
-                <div>
-                    
-                </div>
-
-                <div class="d-flex gap-2">
-
-                <input
-                        id="searchInput"
-                        type="text"
-                        class="form-control"
-                        placeholder="Search name...">
-
-                        <select id="filterBarangay" class="form-select">
-
-                            <option value="">Filter</option>
-                            
-
-                         </select>
-
-                </div>
-
-            </div>
+    
             <!-- Stats Cards Row -->
            
 
@@ -159,94 +136,46 @@ require "../php/admin_only.php";
                 <!-- Recent Aid Distribution -->
                
 
-<div class="col-12">
+                <div class="col-12">
 
-    <div class="table-container">
+                    <div class="table-container">
 
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">
-                <i class="fas fa-list me-2 text-gold"></i>
-                User Activity Logs
-            </h5>
-        </div>
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <i class="fas fa-list me-2 text-gold"></i>
+                            User Activity Logs
+                        </h5>
+                    </div>
 
+                    <div class="table-responsive">
 
-        <div class="table-responsive">
+                        <table id="logsTable" class="table">
 
-            <table id="logsTable" class="table table-hover">
+                            <thead>
+                                <tr>
+                                  
+                                    <th>Date</th>
+                                    <th>User</th>
+                                    <th>Action</th>
+                                    <th>Module</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
 
-                <thead>
+                            <tbody></tbody>
 
-                    <tr>
-
-                        <th>#</th>
-                        <th>Date</th>
-                        <th>User</th>
-                        <th>Action</th>
-                        <th>Module</th>
-                        <th>Details</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    <tr>
-                        <td>1</td>
-                        <td>2026-03-23</td>
-                        <td>user1</td>
-                        <td>
-                            <span class="badge bg-success">
-                                Added
-                            </span>
-                        </td>
-                        <td>Assistance</td>
-                        <td>Added new assistance record</td>
-                    </tr>
-
-                    <tr>
-                        <td>2</td>
-                        <td>2026-03-23</td>
-                        <td>user2</td>
-                        <td>
-                            <span class="badge bg-warning text-dark">
-                                Updated
-                            </span>
-                        </td>
-                        <td>Beneficiary</td>
-                        <td>Edited beneficiary info</td>
-                    </tr>
-
-                    <tr>
-                        <td>3</td>
-                        <td>2026-03-23</td>
-                        <td>user1</td>
-                        <td>
-                            <span class="badge bg-danger">
-                                Deleted
-                            </span>
-                        </td>
-                        <td>Records</td>
-                        <td>Deleted record</td>
-                    </tr>
-
-                </tbody>
-
-            </table>
+                        </table>
 
 
-            <div class="d-flex justify-content-between mt-2">
+                        <div class="d-flex justify-content-between mt-2">
+                            <div id="recordCount"></div>
+                        </div>
 
-                <div id="recordCount"></div>
+                        <ul class="pagination justify-content-center"></ul>
 
-            </div>
+                    </div>
 
-            <ul class="pagination justify-content-center"></ul>
-
-            </div>
-
-    </div>
+                </div>
 
 </div>
 
