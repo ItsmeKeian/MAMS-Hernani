@@ -6,6 +6,9 @@ require "../logs.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
+    $id = $_POST["id"];
+
+
     // ========================
     // BENEFICIARY DATA
     // ========================
@@ -63,36 +66,65 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     // ========================
-    // INSERT BENEFICIARY
+    // UPDATE BENEFICIARY
     // ========================
 
-    $sql = "INSERT INTO beneficiaries (
+    $sql = "
 
-        region,province,municipality,barangay,district,evacuation_site,
+    UPDATE beneficiaries SET
 
-        last_name,first_name,middle_name,name_ext,
-        birthdate,age,place_of_birth,
-        sex,civil_status,
-        mothers_maiden_name,religion,occupation,
-        monthly_income,
-        id_card_presented,id_number,
-        contact_number,
+    region=?,
+    province=?,
+    municipality=?,
+    barangay=?,
+    district=?,
+    evacuation_site=?,
 
-        house_no,street,sitio,
-        addr_barangay,addr_city,addr_province,zip_code,
+    last_name=?,
+    first_name=?,
+    middle_name=?,
+    name_ext=?,
 
-        is_4ps,ip_type,
+    birthdate=?,
+    age=?,
+    place_of_birth=?,
 
-        bank_wallet,account_name,account_type,account_number,
+    sex=?,
+    civil_status=?,
 
-        ownership,damage_classification,
+    mothers_maiden_name=?,
+    religion=?,
+    occupation=?,
 
-        date_registered
+    monthly_income=?,
+    id_card_presented=?,
+    id_number=?,
+    contact_number=?,
 
-    )
+    house_no=?,
+    street=?,
+    sitio=?,
+    addr_barangay=?,
+    addr_city=?,
+    addr_province=?,
+    zip_code=?,
 
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    is_4ps=?,
+    ip_type=?,
 
+    bank_wallet=?,
+    account_name=?,
+    account_type=?,
+    account_number=?,
+
+    ownership=?,
+    damage_classification=?,
+
+    date_registered=?
+
+    WHERE id=?
+
+    ";
 
     $stmt = $conn->prepare($sql);
 
@@ -102,11 +134,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $last_name,$first_name,$middle_name,$name_ext,
         $birthdate,$age,$place_of_birth,
+
         $sex,$civil_status,
+
         $mothers_maiden_name,$religion,$occupation,
+
         $monthly_income,
-        $id_card_presented,$id_number,
-        $contact_number,
+        $id_card_presented,$id_number,$contact_number,
 
         $house_no,$street,$sitio,
         $addr_barangay,$addr_city,$addr_province,$zip_code,
@@ -117,20 +151,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $ownership,$damage,
 
-        $date_registered
+        $date_registered,
+
+        $id
 
     ]);
 
 
     // ========================
-    // GET LAST ID
+    // DELETE OLD FAMILY
     // ========================
 
-    $beneficiary_id = $conn->lastInsertId();
+    $delFam = $conn->prepare("
+    DELETE FROM family_members
+    WHERE beneficiary_id = ?
+    ");
+
+    $delFam->execute([$id]);
 
 
     // ========================
-    // SAVE FAMILY MEMBERS
+    // INSERT FAMILY
     // ========================
 
     if (isset($_POST["fm_name"])) {
@@ -144,25 +185,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $occupation = $_POST["fm_occupation"];
         $vulnerability = $_POST["fm_vulnerability"];
 
+        for ($i=0;$i<count($names);$i++) {
 
-        for ($i = 0; $i < count($names); $i++) {
-
-            if ($names[$i] == "") continue;
+            if ($names[$i]=="") continue;
 
             $sql2 = "
 
             INSERT INTO family_members
-
             (
-            beneficiary_id,
-            name,
-            relation,
-            birthdate,
-            age,
-            sex,
-            education,
-            occupation,
-            vulnerability
+                beneficiary_id,
+                name,
+                relation,
+                birthdate,
+                age,
+                sex,
+                education,
+                occupation,
+                vulnerability
             )
 
             VALUES (?,?,?,?,?,?,?,?,?)
@@ -173,7 +212,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $stmt2->execute([
 
-                $beneficiary_id,
+                $id,
                 $names[$i],
                 $relations[$i],
                 $birthdates[$i],
@@ -190,72 +229,85 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
 
+    // ========================
+    // DELETE OLD ASSISTANCE
+    // ========================
 
-// ========================
-// SAVE ASSISTANCE
-// ========================
+    $delAid = $conn->prepare("
+    DELETE FROM assistance_records
+    WHERE beneficiary_id = ?
+    ");
 
-if (isset($_POST["aid_date"])) {
+    $delAid->execute([$id]);
 
-    $dates = $_POST["aid_date"];
-    $receiving = $_POST["aid_receiving"];
-    $disaster = $_POST["aid_disaster"];
-    $type = $_POST["aid_type"];
-    $unit = $_POST["aid_unit"];
-    $qty = $_POST["aid_qty"];
-    $cost = $_POST["aid_cost"];
-    $provider = $_POST["aid_provider"];
-    
-    
-    for ($i = 0; $i < count($dates); $i++) {
-    
-    if ($dates[$i] == "") continue;
-    
-    $sql3 = "
-    
-    INSERT INTO assistance_records
-    (
-    beneficiary_id,
-    date_received,
-    receiving_name,
-    disaster_type,
-    assistance_type,
-    unit,
-    quantity,
-    cost,
-    provider
-    )
-    
-    VALUES (?,?,?,?,?,?,?,?,?)
-    
-    ";
-    
-    $stmt3 = $conn->prepare($sql3);
-    
-    $stmt3->execute([
-    
-    $beneficiary_id,
-    $dates[$i],
-    $receiving[$i],
-    $disaster[$i],
-    $type[$i],
-    $unit[$i],
-    $qty[$i],
-    $cost[$i],
-    $provider[$i]
-   
-    
-    ]);
-    
+
+    // ========================
+    // INSERT ASSISTANCE
+    // ========================
+
+    if (isset($_POST["aid_date"])) {
+
+        $dates = $_POST["aid_date"];
+        $receiving = $_POST["aid_receiving"];
+        $disaster = $_POST["aid_disaster"];
+        $type = $_POST["aid_type"];
+        $unit = $_POST["aid_unit"];
+        $qty = $_POST["aid_qty"];
+        $cost = $_POST["aid_cost"];
+        $provider = $_POST["aid_provider"];
+
+        for ($i=0;$i<count($dates);$i++) {
+
+            if ($dates[$i]=="") continue;
+
+            $sql3 = "
+
+            INSERT INTO assistance_records
+            (
+                beneficiary_id,
+                date_received,
+                receiving_name,
+                disaster_type,
+                assistance_type,
+                unit,
+                quantity,
+                cost,
+                provider
+            )
+
+            VALUES (?,?,?,?,?,?,?,?,?)
+
+            ";
+
+            $stmt3 = $conn->prepare($sql3);
+
+            $stmt3->execute([
+
+                $id,
+                $dates[$i],
+                $receiving[$i],
+                $disaster[$i],
+                $type[$i],
+                $unit[$i],
+                $qty[$i],
+                $cost[$i],
+                $provider[$i]
+
+            ]);
+
+        }
+
     }
-    
-    }
 
+
+    // ========================
+    // LOG
+    // ========================
 
     addLog(
-        "create",
+        "update",
         "beneficiary",
-        "Created beneficiary: " . $first_name . " " . $last_name
+        "Updated beneficiary: ".$first_name." ".$last_name
     );
 
 

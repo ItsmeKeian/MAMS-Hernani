@@ -1,11 +1,26 @@
 <?php
 
 require "../dbconnect.php";
+require "../logs.php";
 
 $barangay = $_GET["barangay"] ?? "";
 $search   = $_GET["search"] ?? "";
 $from     = $_GET["from"] ?? "";
 $to       = $_GET["to"] ?? "";
+
+
+// ================= LOG =================
+
+$details = "Printed aid distribution";
+
+if ($barangay != "") $details .= " | Brgy: $barangay";
+if ($search != "") $details .= " | Search: $search";
+if ($from && $to) $details .= " | Date: $from to $to";
+
+addLog("print", "aid_distribution", $details);
+
+
+// ================= SQL =================
 
 $sql = "
 
@@ -141,6 +156,16 @@ Date Range:
 </p>
 
 <?php endif; ?>
+
+<?php if($barangay): ?>
+
+<p>
+Barangay:
+<?= $barangay ?>
+</p>
+
+<?php endif; ?>
+
 
 </td>
 

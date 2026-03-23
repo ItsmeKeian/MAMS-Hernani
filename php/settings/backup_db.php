@@ -1,5 +1,8 @@
 <?php
 
+require "../dbconnect.php";
+require "../logs.php";
+
 $db = "mamshernani";
 
 $backupDir = __DIR__ . "/../backup/";
@@ -15,5 +18,15 @@ $mysqldump = "C:/xampp/mysql/bin/mysqldump";
 $command = "\"$mysqldump\" --user=root $db > \"$filename\"";
 
 system($command);
+
+
+// ================= LOG =================
+
+addLog(
+    "backup",
+    "database",
+    "Created database backup"
+);
+
 
 echo "ok";

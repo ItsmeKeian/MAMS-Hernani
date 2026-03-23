@@ -1,6 +1,7 @@
 <?php
 
 require "../dbconnect.php";
+require "../logs.php";
 
 $barangay = $_GET["barangay"] ?? "";
 $search   = $_GET["search"] ?? "";
@@ -27,6 +28,22 @@ if ($from != "" && $to != "") {
 }
 
 $filename .= ".xls";
+
+$details = "Exported aid distribution";
+
+if ($barangay != "") {
+    $details .= " | Barangay: " . $barangay;
+}
+
+if ($from != "" && $to != "") {
+    $details .= " | Date: $from to $to";
+}
+
+addLog(
+    "export",
+    "aid_distribution",
+    $details
+);
 
 
 header("Content-Type: application/vnd.ms-excel");

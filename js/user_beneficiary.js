@@ -562,9 +562,7 @@ function loadBeneficiary(page = 1, search = "", barangay = "") {
                                 <i class="fas fa-edit"></i>
                             </button>
 
-                            <button class="btn btn-sm btn-danger delete" data-id="${b.id}">
-                                <i class="fas fa-trash"></i>
-                            </button>
+                            
 
                         </td>
 

@@ -1,5 +1,5 @@
 <?php
-require "../php/admin_only.php";
+require "../php/user_only.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -252,18 +252,6 @@ require "../php/admin_only.php";
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="users.php">
-                        <i class="fas fa-user-shield"></i>
-                        Users
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="logs.php">
-                    <i class="fas fa-clipboard-list"></i>
-                        Logs
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link active" href="settings.php">
                     <i class="fas fa-gear"></i>
                         Settings
@@ -419,14 +407,7 @@ require "../php/admin_only.php";
                                 <i class="fas fa-cloud-upload-alt"></i>
                                 Create Backup Now
                             </button>
-                            <button id="clearLogs" class="btn btn-outline-danger btn-modern mb-2">
-                                <i class="fas fa-trash-alt"></i>
-                                Clear Logs (<span id="logSize">0 KB</span>)
-                            </button>
-                            <button id="clearBackup" class="btn btn-outline-warning btn-modern">
-                                <i class="fas fa-archive"></i>
-                                Clear Old Backups (<span id="backupSize">0 MB</span>)
-                            </button>
+                        
                         </div>
                     </div>
                 </div>

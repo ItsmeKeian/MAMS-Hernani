@@ -6,6 +6,7 @@ $(document).ready(function () {
     loadBackupCount();
     loadServerTime();
     loadStorage();
+    loadLogSize();
 
     setInterval(loadServerTime, 1000);
 
@@ -168,7 +169,9 @@ $("#clearLogs").click(function(){
                         timer: 1200,
                         showConfirmButton: false
                     });
-
+                
+                    loadLogSize();
+                
                 });
 
             }, 300);
@@ -178,6 +181,18 @@ $("#clearLogs").click(function(){
     });
 
 });
+
+
+
+function loadLogSize() {
+
+    $.get("../php/settings/get_logs_size.php", function (data) {
+
+        $("#logSize").text(data);
+
+    });
+
+}
 
 
 $("#clearBackup").click(function(){

@@ -1,7 +1,29 @@
 <?php
 
 require "../dbconnect.php";
+require "../logs.php";
 
+
+$search   = $_GET["search"] ?? "";
+$barangay = $_GET["barangay"] ?? "";
+$damage   = $_GET["damage"] ?? "";
+$from     = $_GET["from"] ?? "";
+$to       = $_GET["to"] ?? "";
+
+
+// ================= LOG =================
+
+$details = "Exported beneficiaries";
+
+if ($barangay != "") $details .= " | Brgy: $barangay";
+if ($damage != "") $details .= " | Damage: $damage";
+if ($search != "") $details .= " | Search: $search";
+if ($from != "" && $to != "") $details .= " | Date: $from to $to";
+
+addLog("export", "beneficiaries", $details);
+
+
+// ================= FILENAME =================
 
 $filename = "beneficiaries.xls";
 
@@ -10,9 +32,6 @@ header("Content-Disposition: attachment; filename=$filename");
 
 
 echo "<table border='1'>";
-
-
-/* ================= HEADER ================= */
 
 echo "<tr>
 
@@ -83,54 +102,64 @@ echo "<tr>
 </tr>";
 
 
+// ================= SQL WITH FILTER =================
 
-/* ================= GET ALL BENEFICIARIES ================= */
+$sql = "SELECT * FROM beneficiaries WHERE 1=1";
+$params = [];
 
-$stmt = $conn->prepare("
-SELECT *
-FROM beneficiaries
-ORDER BY id DESC
-");
+if ($search != "") {
+    $sql .= " AND CONCAT(first_name,' ',last_name) LIKE ?";
+    $params[] = "%$search%";
+}
 
-$stmt->execute();
+if ($barangay != "") {
+    $sql .= " AND addr_barangay LIKE ?";
+    $params[] = "%$barangay%";
+}
+
+if ($damage != "") {
+    $sql .= " AND damage_classification LIKE ?";
+    $params[] = "%$damage%";
+}
+
+if ($from != "" && $to != "") {
+    $sql .= " AND date_registered BETWEEN ? AND ?";
+    $params[] = $from;
+    $params[] = $to;
+}
+
+$sql .= " ORDER BY id DESC";
+
+$stmt = $conn->prepare($sql);
+$stmt->execute($params);
 
 $beneficiaries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
+// ================= LOOP =================
 
 foreach ($beneficiaries as $b) {
 
-
-    /* ===== GET FAMILY ===== */
-
     $fam = $conn->prepare("
-    SELECT *
-    FROM family_members
-    WHERE beneficiary_id = ?
+        SELECT *
+        FROM family_members
+        WHERE beneficiary_id = ?
     ");
-
     $fam->execute([$b["id"]]);
-
     $family = $fam->fetchAll(PDO::FETCH_ASSOC);
 
 
-
-    /* ===== GET ASSISTANCE ===== */
-
     $assist = $conn->prepare("
-    SELECT *
-    FROM assistance_records
-    WHERE beneficiary_id = ?
-    ORDER BY date_received ASC
+        SELECT *
+        FROM assistance_records
+        WHERE beneficiary_id = ?
+        ORDER BY date_received ASC
     ");
-
     $assist->execute([$b["id"]]);
-
     $assistance = $assist->fetch(PDO::FETCH_ASSOC);
 
 
-
-    /* ===== IF MAY FAMILY ===== */
+    // ================= WITH FAMILY =================
 
     if (!empty($family)) {
 
@@ -139,9 +168,6 @@ foreach ($beneficiaries as $b) {
         foreach ($family as $f) {
 
             echo "<tr>";
-
-
-            /* BENEFICIARY FIRST ROW ONLY */
 
             if ($first) {
 
@@ -195,16 +221,12 @@ foreach ($beneficiaries as $b) {
 
 ";
 
-
             } else {
 
                 echo str_repeat("<td></td>", 40);
 
             }
 
-
-
-            /* FAMILY */
 
             echo "
 
@@ -219,8 +241,6 @@ foreach ($beneficiaries as $b) {
 
 ";
 
-
-            /* ASSISTANCE FIRST ROW ONLY */
 
             if ($first && $assistance) {
 
@@ -243,7 +263,6 @@ foreach ($beneficiaries as $b) {
 
             }
 
-
             echo "</tr>";
 
             $first = false;
@@ -252,8 +271,7 @@ foreach ($beneficiaries as $b) {
 
     }
 
-
-    /* ===== NO FAMILY ===== */
+    // ================= NO FAMILY =================
 
     else {
 
@@ -322,6 +340,4 @@ foreach ($beneficiaries as $b) {
     }
 
 }
-
-
 echo "</table>";

@@ -1,6 +1,7 @@
 <?php
 
 require "../dbconnect.php";
+require "../logs.php";
 
 $barangay = $_GET["barangay"] ?? "";
 $search = $_GET["search"] ?? "";
@@ -8,6 +9,20 @@ $from = $_GET["from"] ?? "";
 $to = $_GET["to"] ?? "";
 $damage = $_GET["damage"] ?? "";
 
+
+// ================= LOG =================
+
+$details = "Printed beneficiary report";
+
+if ($barangay != "") $details .= " | Brgy: $barangay";
+if ($damage != "") $details .= " | Damage: $damage";
+if ($search != "") $details .= " | Search: $search";
+if ($from && $to) $details .= " | Date: $from to $to";
+
+addLog("print", "beneficiaries", $details);
+
+
+// ================= SQL =================
 
 $sql = "SELECT * FROM beneficiaries WHERE 1=1";
 
@@ -43,124 +58,125 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 <!DOCTYPE html>
-    <html>
-    <head>
+<html>
+<head>
 
-    <title>Print Report</title>
+<title>Print Report</title>
 
-    <style>
+<style>
 
-    body{
-    font-family: Arial;
-    }
+body{
+font-family: Arial;
+}
 
-    .header{
-    text-align:center;
-    margin-bottom:20px;
-    }
+.header{
+text-align:center;
+margin-bottom:20px;
+}
 
-    table{
-    width:100%;
-    border-collapse:collapse;
-    }
+table{
+width:100%;
+border-collapse:collapse;
+}
 
-    th,td{
-    border:1px solid black;
-    padding:5px;
-    font-size:12px;
-    }
+th,td{
+border:1px solid black;
+padding:5px;
+font-size:12px;
+}
 
-    @media print{
+@media print{
 
-    button{
-    display:none;
-    }
+button{
+display:none;
+}
 
-    }
+}
 
-    </style>
+</style>
 
-    </head>
-        <body>
-
-
-            <div class="header">
-
-                    <table width="100%" border="0">
-
-                        <tr>
-
-                            <td width="120">
-
-                            <img src="../../assets/img/logo.jpg" width="90">
-
-                            </td>
-
-                            <td align="center">
-
-                                <h2>Republic of the Philippines</h2>
-                                <h2>Municipality of Hernani</h2>
-                                <h3>Municipal Aid Monitoring System</h3>
-                                <h3>Beneficiary Report</h3>
-
-                                <?php if($from && $to): ?>
-
-                                <p>
-                                Date Range:
-                                <?= $from ?> to <?= $to ?>
-                                </p>
-
-                                <?php endif; ?>
-
-                            </td>
-
-                        <td width="120"></td>
-
-                        </tr>
-
-                    </table>
-
-                 <hr>
-
-            </div>
+</head>
+<body>
 
 
-        <button onclick="window.print()">Print</button>
+<div class="header">
+
+<table width="100%" border="0">
+
+<tr>
+
+<td width="120">
+<img src="../../assets/img/logo.jpg" width="90">
+</td>
+
+<td align="center">
+
+<h2>Republic of the Philippines</h2>
+<h2>Municipality of Hernani</h2>
+<h3>Municipal Aid Monitoring System</h3>
+<h3>Beneficiary Report</h3>
+
+<?php if($from && $to): ?>
+<p>Date Range: <?= $from ?> to <?= $to ?></p>
+<?php endif; ?>
+
+<?php if($barangay): ?>
+<p>Barangay: <?= $barangay ?></p>
+<?php endif; ?>
+
+<?php if($damage): ?>
+<p>Damage: <?= $damage ?></p>
+<?php endif; ?>
+
+</td>
+
+<td width="120"></td>
+
+</tr>
+
+</table>
+
+<hr>
+
+</div>
 
 
-            <table>
-
-                <tr>
-
-                    <th>Name</th>
-                    <th>Barangay</th>
-                    <th>Age</th>
-                    <th>Contact</th>
-                    <th>Damage</th>
-                    <th>Date</th>
-
-                </tr>
-
-            <?php foreach($data as $b): ?>
-
-                <tr>
-
-                    <td>
-                    <?= $b["last_name"] ?> <?= $b["first_name"] ?>
-                    </td>
-
-                    <td><?= $b["addr_barangay"] ?></td>
-                    <td><?= $b["age"] ?></td>
-                    <td><?= $b["contact_number"] ?></td>
-                    <td><?= $b["damage_classification"] ?></td>
-                    <td><?= $b["date_registered"] ?></td>
-
-                </tr>
-
-                 <?php endforeach; ?>
-
-            </table>
+<button onclick="window.print()">Print</button>
 
 
-        </body>
-    </html>
+<table>
+
+<tr>
+
+<th>Name</th>
+<th>Barangay</th>
+<th>Age</th>
+<th>Contact</th>
+<th>Damage</th>
+<th>Date</th>
+
+</tr>
+
+<?php foreach($data as $b): ?>
+
+<tr>
+
+<td>
+<?= $b["last_name"] ?> <?= $b["first_name"] ?>
+</td>
+
+<td><?= $b["addr_barangay"] ?></td>
+<td><?= $b["age"] ?></td>
+<td><?= $b["contact_number"] ?></td>
+<td><?= $b["damage_classification"] ?></td>
+<td><?= $b["date_registered"] ?></td>
+
+</tr>
+
+<?php endforeach; ?>
+
+</table>
+
+
+</body>
+</html>
