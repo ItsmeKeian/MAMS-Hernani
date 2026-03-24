@@ -27,293 +27,266 @@ $famStmt->execute([$id]);
 
 $family = $famStmt->fetchAll(PDO::FETCH_ASSOC);
 
-?>
+
+/* ASSISTANCE RECORDS */
+
+$recStmt = $conn->prepare("
+SELECT * FROM assistance_records
+WHERE beneficiary_id = ?
+ORDER BY date_received ASC
+");
+
+$recStmt->execute([$id]);
+
+$records = $recStmt->fetchAll(PDO::FETCH_ASSOC);
+
+?>  
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Municipal Aid Monitoring System - Municipality of Hernani</title>
+    <link href="../assets/img/logo.jpg" rel="icon">
+    <!-- Bootstrap 5 CSS -->
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- FontAwesome 6 -->
 
-<title>FACED FORM</title>
+    <link rel="stylesheet" href="../assets/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/print_dswdform.css">
+    
 
-<style>
-
-body{
-font-family: Arial, sans-serif;
-background:#eee;
-}
-
-.print-btn{
-margin:10px;
-}
-
-.form{
-width:900px;
-margin:auto;
-background:white;
-border:2px solid #000;
-padding:10px;
-font-size:12px;
-}
-
-.header{
-text-align:center;
-font-weight:bold;
-}
-
-.section-title{
-background:#1f3a5f;
-color:white;
-padding:3px;
-font-weight:bold;
-margin-top:5px;
-}
-
-.row{
-display:flex;
-margin-bottom:3px;
-}
-
-.label{
-width:150px;
-}
-
-.value{
-flex:1;
-border-bottom:1px solid black;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-font-size:12px;
-}
-
-th,td{
-border:1px solid black;
-padding:2px;
-text-align:left;
-}
-
-.signature{
-margin-top:20px;
-display:flex;
-justify-content:space-between;
-}
-
-.sig-box{
-width:45%;
-text-align:center;
-}
-
-.thumb{
-width:80px;
-height:80px;
-border:1px solid black;
-}
-
-@media print{
-
-.print-btn{
-display:none;
-}
-
-body{
-background:white;
-}
-
-}
-
-</style>
-
+   
+  
 </head>
 <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-logo">
+            <!-- Philippine Municipality Logo Placeholder -->
+            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #fbbf24, #f59e0b); border-radius: 12px; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: #1e3a8a; font-weight: bold;">
+                <img class="logo" src="../assets/img/logo.jpg" alt="logo">
+            </div>
+            <h4 class="sidebar-title mb-1">Municipality of Hernani</h4>
+            
+        </div>
+
+        <nav class="sidebar-nav mt-4">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link " href="dashboard.php">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="beneficiary.php">
+                        <i class="fas fa-users"></i>
+                        Beneficiaries
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="aid_distribution.php">
+                        <i class="fas fa-boxes"></i>
+                        Aid Distribution
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="reports.php">
+                        <i class="fas fa-file-alt"></i>
+                        Reports
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="users.php">
+                        <i class="fas fa-user-shield"></i>
+                        Users
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="logs.php">
+                    <i class="fas fa-clipboard-list"></i>
+                        Logs
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="settings.php">
+                    <i class="fas fa-gear"></i>
+                        Settings
+                    </a>
+                </li>
+
+                <li class="nav-item mt-auto">
+                    <a class="nav-link" href="../php/logout.php">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="d-flex justify-content-between align-items-center">
+
+                <div class="d-flex align-items-center">
+
+                    <button class="btn btn-outline-primary d-lg-none me-2" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+
+                    <div>
+                        <h1 class="header-title mb-1">Print Beneficiary</h1>
+                        <p class="header-subtitle mb-0">
+                        Welcome back, Administrator. Here's what's happening today.
+                        </p>
+                    </div>
+
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="dropdown">
+                        <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
+                            <img src="../assets/img/logo.jpg" class="rounded-circle me-2" width="40" height="40" alt="Admin">
+                            <span class="d-none d-md-inline fw-semibold">Administrator</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../php/logout.php"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
 
+        <!-- Page Content -->
+        
+            <div class="page-content">
 
-<button class="print-btn" onclick="window.print()">
-Print
-</button>
+            
 
 
-<div class="form">
 
-<div class="header">
+            <div class="d-flex justify-content-between mb-3">
 
-Republic of the Philippines<br>
-Department of Social Welfare and Development<br>
-FAMILY ASSISTANCE CARD IN EMERGENCIES AND DISASTERS (FACED)
+                <div>
+                    <a href="beneficiary.php" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </a>
+                </div>
 
-</div>
+                <div>
+                    <button class="btn btn-primary" onclick="printForm()">
+                        <i class="fas fa-print"></i> Print
+                    </button>
+                </div>
 
+            </div>
 
-<div class="section-title">
-LOCATION OF THE AFFECTED FAMILY
-</div>
 
-<div class="row">
-<div class="label">Region</div>
-<div class="value"><?= $b["region"] ?></div>
+                <div class="print-preview">
 
-<div class="label">District</div>
-<div class="value"><?= $b["district"] ?></div>
-</div>
 
-<div class="row">
-<div class="label">Province</div>
-<div class="value"><?= $b["province"] ?></div>
+               <!-- FRONT PAGE -->
 
-<div class="label">Barangay</div>
-<div class="value"><?= $b["barangay"] ?></div>
-</div>
+                <div class="print-page">
 
-<div class="row">
-<div class="label">Municipality</div>
-<div class="value"><?= $b["municipality"] ?></div>
+                <div class="form-copy">
+                <div class="form">
+                <?php include "form_front.php"; ?>
+                </div>
+                </div>
 
-<div class="label">Evacuation</div>
-<div class="value"><?= $b["evacuation_site"] ?></div>
-</div>
+                <div class="form-copy">
+                <div class="form">
+                <?php include "form_front.php"; ?>
+                </div>
+                </div>
 
+                </div>
 
 
-<div class="section-title">
-HEAD OF THE FAMILY
-</div>
 
-<div class="row">
-<div class="label">Last Name</div>
-<div class="value"><?= $b["last_name"] ?></div>
+                <!-- BACK PAGE -->
 
-<div class="label">Civil Status</div>
-<div class="value"><?= $b["civil_status"] ?></div>
-</div>
+                    <div class="print-page">
 
-<div class="row">
-<div class="label">First Name</div>
-<div class="value"><?= $b["first_name"] ?></div>
+                    <div class="form-copy">
+                    <div class="form">
+                    <?php include "form_back.php"; ?>
+                    </div>
+                    </div>
 
-<div class="label">Mother's Maiden</div>
-<div class="value"><?= $b["mothers_maiden_name"] ?></div>
-</div>
+                    <div class="form-copy">
+                    <div class="form">
+                    <?php include "form_back.php"; ?>
+                    </div>
+                    </div>
 
-<div class="row">
-<div class="label">Birthdate</div>
-<div class="value"><?= $b["birthdate"] ?></div>
+                    </div>
 
-<div class="label">Religion</div>
-<div class="value"><?= $b["religion"] ?></div>
-</div>
 
-<div class="row">
-<div class="label">Age</div>
-<div class="value"><?= $b["age"] ?></div>
+                    </div>
 
-<div class="label">Occupation</div>
-<div class="value"><?= $b["occupation"] ?></div>
-</div>
 
-<div class="row">
-<div class="label">Contact</div>
-<div class="value"><?= $b["contact_number"] ?></div>
 
-<div class="label">Income</div>
-<div class="value"><?= $b["monthly_income"] ?></div>
-</div>
+                </div>
 
 
+           
 
-<div class="section-title">
-PERMANENT ADDRESS
-</div>
+    </div> <!-- main-content -->
 
-<div class="row">
-<div class="label">Address</div>
-<div class="value">
 
-<?= $b["house_no"] ?>
-<?= $b["street"] ?>
-<?= $b["addr_barangay"] ?>
-<?= $b["addr_city"] ?>
-<?= $b["addr_province"] ?>
+ 
 
-</div>
-</div>
 
 
+<script src="../assets/js/jquery-4.0.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script src="../js/beneficiary.js"></script>
 
-<div class="section-title">
-FAMILY INFORMATION
-</div>
+<script>
 
-<table>
+$("#menuToggle").click(function () {
 
-<tr>
+    $(".sidebar").toggleClass("show");
 
-<th>Name</th>
-<th>Relation</th>
-<th>Birthdate</th>
-<th>Age</th>
-<th>Sex</th>
-<th>Education</th>
-<th>Occupation</th>
-<th>Vulnerability</th>
+});
 
-</tr>
 
-<?php foreach($family as $f): ?>
+// close sidebar when clicking outside (mobile)
 
-<tr>
+$(document).click(function (e) {
 
-<td><?= $f["name"] ?></td>
-<td><?= $f["relation"] ?></td>
-<td><?= $f["birthdate"] ?></td>
-<td><?= $f["age"] ?></td>
-<td><?= $f["sex"] ?></td>
-<td><?= $f["education"] ?></td>
-<td><?= $f["occupation"] ?></td>
-<td><?= $f["vulnerability"] ?></td>
+    if (
+        !$(e.target).closest(".sidebar").length &&
+        !$(e.target).closest("#menuToggle").length
+    ) {
+        $(".sidebar").removeClass("show");
+    }
 
-</tr>
+});
 
-<?php endforeach; ?>
 
-</table>
 
+function printForm() {
+    window.print();
+}
 
+$("#menuToggle").click(function () {
+    $(".sidebar").toggleClass("show");
+});
 
-<div class="section-title">
-HOUSE DAMAGE
-</div>
-
-<div class="row">
-<div class="label">Ownership</div>
-<div class="value"><?= $b["ownership"] ?></div>
-
-<div class="label">Damage</div>
-<div class="value"><?= $b["damage_classification"] ?></div>
-</div>
-
-
-
-<div class="signature">
-
-<div class="sig-box">
-
-<div class="thumb"></div>
-
-Right Thumbmark
-
-</div>
-
-
-<div class="sig-box">
-
-Signature of Family Head
-
-</div>
-
-</div>
-
-
-</div>
+</script>
 
 </body>
 </html>
