@@ -93,3 +93,29 @@ To develop a centralized web-based Municipal Aid Monitoring System that improves
 - Localhost / Offline System
 - Client Project
 - Government Monitoring System
+
+---
+
+## 📷 Screenshots
+
+---
+
+## 📌 Project Status
+
+Ongoing Development
+
+This system is currently under development and running in a localhost environment.
+The project is intended for internal use and testing.
+
+---
+
+## 👨‍💻 Developer
+
+Keian Camposano Gacillos  
+Full-Stack Web Developer 
+
+Portfolio  
+https://www.keiancamposanogacillos.online
+
+GitHub  
+https://github.com/ItsmeKeian
