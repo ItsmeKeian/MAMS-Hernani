@@ -97,15 +97,33 @@ To develop a centralized web-based Municipal Aid Monitoring System that improves
 ---
 
 ## 📷 Screenshots
-assets/screenshots/login.png
-assets/screenshots/dashboard.png
-assets/screenshots/beneficiary.png
-assets/screenshots/printbeneficiary.png
-assets/screenshots/aid.png
-assets/screenshots/reports.png
-assets/screenshots/users.png
-assets/screenshots/logs.png
-assets/screenshots/settings.png
+
+### Login
+![Login](assets/screenshots/login.png)
+
+### Dashboard
+![Dashboard](assets/screenshots/dashboard.png)
+
+### Beneficiary
+![Beneficiary](assets/screenshots/beneficiary.png)
+
+### Print Beneficiary
+![Print](assets/screenshots/printbeneficiary.png)
+
+### Aid Distribution
+![Aid](assets/screenshots/aid.png)
+
+### Reports
+![Reports](assets/screenshots/reports.png)
+
+### Users
+![Users](assets/screenshots/users.png)
+
+### Logs
+![Logs](assets/screenshots/logs.png)
+
+### Settings
+![Settings](assets/screenshots/settings.png)
 
 ---
 
