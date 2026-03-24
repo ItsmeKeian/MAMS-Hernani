@@ -1,6 +1,7 @@
 <?php
 
 require "../php/dbconnect.php";
+require "../php/admin_only.php";
 
 $id = $_GET["id"];
 
