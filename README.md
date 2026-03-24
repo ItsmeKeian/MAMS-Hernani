@@ -97,8 +97,16 @@ To develop a centralized web-based Municipal Aid Monitoring System that improves
 ---
 
 ## 📷 Screenshots
-image.png
-image.png
+assets/screenshots/login.png
+assets/screenshots/dashboard.png
+assets/screenshots/beneficiary.png
+assets/screenshots/printbeneficiary.png
+assets/screenshots/aid.png
+assets/screenshots/reports.png
+assets/screenshots/users.png
+assets/screenshots/logs.png
+assets/screenshots/settings.png
+
 ---
 
 ## 📌 Project Status
