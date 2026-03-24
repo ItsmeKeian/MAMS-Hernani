@@ -206,7 +206,7 @@ $records = $recStmt->fetchAll(PDO::FETCH_ASSOC);
 
                 <div class="form-copy">
                 <div class="form">
-                <?php include "form_front.php"; ?>
+                <?php include "form_back.php"; ?>
                 </div>
                 </div>
 
@@ -214,23 +214,6 @@ $records = $recStmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 
-                <!-- BACK PAGE -->
-
-                    <div class="print-page">
-
-                    <div class="form-copy">
-                    <div class="form">
-                    <?php include "form_back.php"; ?>
-                    </div>
-                    </div>
-
-                    <div class="form-copy">
-                    <div class="form">
-                    <?php include "form_back.php"; ?>
-                    </div>
-                    </div>
-
-                    </div>
 
 
                     </div>

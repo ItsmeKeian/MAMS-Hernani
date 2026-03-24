@@ -96,7 +96,7 @@ THUMBMARK
 
 <?php
 
-$rows = 18;
+$rows = 42;
 
 for($i=0; $i<$rows; $i++):
 

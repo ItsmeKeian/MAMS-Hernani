@@ -269,22 +269,37 @@ FAMILY INFORMATION
 </tr>
 
 
-<?php foreach($family as $f): ?>
+<?php
+
+$maxRows = 6;
+
+for ($i = 0; $i < $maxRows; $i++):
+
+$f = $family[$i] ?? null;
+
+?>
 
 <tr>
 
-<td><?= $f["name"] ?></td>
-<td><?= $f["relation"] ?></td>
-<td><?= $f["birthdate"] ?></td>
-<td><?= $f["age"] ?></td>
-<td><?= $f["sex"] ?></td>
-<td><?= $f["education"] ?></td>
-<td><?= $f["occupation"] ?></td>
-<td><?= $f["vulnerability"] ?></td>
+<td><?= $f["name"] ?? "" ?></td>
+
+<td><?= $f["relation"] ?? "" ?></td>
+
+<td><?= $f["birthdate"] ?? "" ?></td>
+
+<td><?= $f["age"] ?? "" ?></td>
+
+<td><?= $f["sex"] ?? "" ?></td>
+
+<td><?= $f["education"] ?? "" ?></td>
+
+<td><?= $f["occupation"] ?? "" ?></td>
+
+<td><?= $f["vulnerability"] ?? "" ?></td>
 
 </tr>
 
-<?php endforeach; ?>
+<?php endfor; ?>
 
 </table>
 

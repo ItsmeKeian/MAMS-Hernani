@@ -10,7 +10,7 @@
 }
 
 
-/* each row */
+/* preview row */
 
 .print-page{
     display:flex;
@@ -36,28 +36,23 @@
     padding:6px;
     border:1px solid black;
     box-sizing:border-box;
-    
 }
+
 
 
 /* =========================
    HEADER
 ========================= */
-/* ===== HEADER FIX ===== */
 
 .form-header{
     display:grid;
-    grid-template-columns: 180px 1fr 180px;
+    grid-template-columns:180px 1fr 180px;
     align-items:center;
     width:100%;
 }
 
-/* LEFT */
-
 .header-left{
     display:flex;
-    align-items:center;
-    justify-content:flex-start;
     gap:6px;
 }
 
@@ -65,27 +60,17 @@
     height:55px;
 }
 
-
-/* CENTER */
-
 .header-center{
     text-align:center;
     font-size:11px;
 }
 
-
-/* RIGHT */
-
 .header-right{
     display:flex;
     flex-direction:column;
     align-items:flex-end;
-    justify-content:center;
     font-size:10px;
 }
-
-
-/* OFFICIAL BOX */
 
 .official-box{
     border:1px solid black;
@@ -101,6 +86,8 @@
     font-size:10px;
 }
 
+
+
 /* =========================
    SECTION BAR
 ========================= */
@@ -114,6 +101,7 @@
     text-align:center;
     font-size:11px;
 }
+
 
 
 /* =========================
@@ -137,6 +125,7 @@
 }
 
 
+
 /* =========================
    TABLE
 ========================= */
@@ -153,6 +142,7 @@
     padding:2px;
     height:18px;
 }
+
 
 
 /* =========================
@@ -190,69 +180,248 @@
     font-size:11px;
 }
 
+
+
 /* =========================
-   PRINT MODE (CLEAN)
+   PRINT MODE (BACK TO BACK PORTRAIT)
+========================= */
+/* =========================
+   SCREEN PREVIEW
 ========================= */
 
+.print-preview{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+
+/* preview row */
+
+.print-page{
+    display:flex;
+    gap:10px;
+    margin:10px 0;
+}
+
+
+/* each copy */
+
+.form-copy{
+    width:48%;
+}
+
+
+/* form */
+
+.form{
+    width:100%;
+    background:white;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:11px;
+    padding:6px;
+    border:1px solid black;
+    box-sizing:border-box;
+}
+
+
+
+/* =========================
+   HEADER
+========================= */
+
+.form-header{
+    display:grid;
+    grid-template-columns:180px 1fr 180px;
+    align-items:center;
+    width:100%;
+}
+
+.header-left{
+    display:flex;
+    gap:6px;
+}
+
+.header-left img{
+    height:55px;
+}
+
+.header-center{
+    text-align:center;
+    font-size:11px;
+}
+
+.header-right{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    font-size:10px;
+}
+
+.official-box{
+    border:1px solid black;
+    width:150px;
+    margin-top:2px;
+}
+
+.official-title{
+    background:#1f3557;
+    color:white;
+    font-weight:bold;
+    text-align:center;
+    font-size:10px;
+}
+
+
+
+/* =========================
+   SECTION BAR
+========================= */
+
+.section-title{
+    background:#1f3557;
+    color:white;
+    font-weight:bold;
+    padding:2px;
+    margin-top:4px;
+    text-align:center;
+    font-size:11px;
+}
+
+
+
+/* =========================
+   GRID
+========================= */
+
+.form-row{
+    display:grid;
+    grid-template-columns:140px 1fr 190px 1fr;
+    gap:4px;
+    margin-bottom:2px;
+}
+
+.label{
+    font-weight:bold;
+}
+
+.value{
+    border-bottom:1px solid black;
+    min-height:14px;
+}
+
+
+
+/* =========================
+   TABLE
+========================= */
+
+.family-table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:11px;
+}
+
+.family-table th,
+.family-table td{
+    border:1px solid black;
+    padding:2px;
+    height:18px;
+}
+
+
+
+/* =========================
+   SIGNATURE
+========================= */
+
+.signature-wrap{
+    display:flex;
+}
+
+.thumb-box{
+    width:120px;
+    text-align:center;
+}
+
+.thumb{
+    width:80px;
+    height:80px;
+    border:1px solid black;
+    margin:auto;
+}
+
+.sign-col{
+    flex:1;
+    padding:0 10px;
+}
+
+.line{
+    border-bottom:1px solid black;
+    height:18px;
+}
+
+.label-sign{
+    text-align:center;
+    font-size:11px;
+}
+
+
+
+/* =========================
+   PRINT MODE (BACK TO BACK PORTRAIT)
+========================= */
 @media print {
 
     @page {
-        size: A4 landscape;
-        margin: 0;
+        size: A4 portrait;
+        margin: 10mm;
     }
-    
+
     body {
         margin: 0;
         padding: 0;
     }
-    
-    
-    /* hide dashboard */
-    
+
     .sidebar,
     .header,
     .btn,
     .dropdown {
         display: none !important;
     }
-    
-    
-    /* preview container */
-    
+
+
+    /* THIS IS THE FIX */
+
     .print-preview {
-        width: 100%;
-        gap: 0;
+        display: block !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
-    
-    
-    /* EACH ROW = 1 PAGE */
-    
+
+
     .print-page {
-    
-        width: 297mm;
-        height: 210mm;
-    
-        display: flex;
-        justify-content: center;
-    
-        gap: 5mm;
-    
-        page-break-after: always;
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
-    
-    .print-page:last-child {
-        page-break-after: auto;
+
+
+    .form-copy {
+
+        width: 100% !important;
+
     }
-    
-    
-    /* EACH FORM */
-    
+
+    .form-copy + .form-copy {
+        page-break-before: always;
+    }
+
+
     .form {
-    
-        width: 148mm;
-        height: 210mm;
-        overflow: hidden;
-        box-sizing: border-box;
+        width: 100%;
     }
-    
-    }
+
+}
