@@ -1,5 +1,6 @@
 <?php
 require "../php/admin_only.php";
+require "../php/license_check.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,10 +9,10 @@ require "../php/admin_only.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Municipal Aid Monitoring System - Municipality of Hernani</title>
     <link href="../assets/img/logo.jpg" rel="icon">
-    <!-- Bootstrap 5 CSS -->
+    
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- FontAwesome 6 -->
+    
     <link rel="stylesheet" href="../assets/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     

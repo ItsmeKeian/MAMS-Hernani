@@ -32,60 +32,60 @@ function loadDashboard() {
 
 function loadChart(res) {
 
-    // =========================
+    
     // BRGY CHART
-    // =========================
+    
 
     new Chart(
         document.getElementById("brgyChart"),
         {
             type: "bar",
-
+    
             data: {
-
                 labels: res.brgyLabels,
-
+    
                 datasets: [{
-
                     label: "Beneficiaries",
-
                     data: res.brgyData,
-
+                
                     backgroundColor: "#2563eb",
-                    borderRadius: 8,
-                    barThickness: 40
-
+                
+                    borderRadius: 12,
+                    borderSkipped: false,
+                    barThickness: 50,
+                
+                    categoryPercentage: 0.5,
+                    barPercentage: 0.7      
                 }]
-
             },
-
+    
             options: {
-
                 responsive: true,
                 maintainAspectRatio: false,
-
+    
                 plugins: {
                     legend: { display: false }
                 },
-
+    
                 scales: {
-                    x: { grid: { display: false } },
+                    x: {
+                        grid: { display: false }
+                    },
                     y: {
                         beginAtZero: true,
-                        ticks: { stepSize: 1 }
+                        ticks: { stepSize: 1 },
+                        grid: {
+                            color: "#eee" // 
+                        }
                     }
                 }
-
             }
-
         }
     );
 
 
-    // =========================
-    // MONTH CHART
-    // =========================
 
+    // MONTH CHART
     new Chart(
         document.getElementById("monthChart"),
         {
@@ -122,9 +122,8 @@ function loadChart(res) {
 
 
 
-    // =========================
     // ITEMS CHART
-    // =========================
+   
 
     new Chart(
         document.getElementById("itemsChart"),
@@ -163,9 +162,9 @@ function loadChart(res) {
 
 
 
-    // =========================
+ 
 // DISASTER CHART
-// =========================
+
 
 new Chart(
     document.getElementById("disasterChart"),
@@ -173,34 +172,47 @@ new Chart(
         type: "bar",
 
         data: {
-
             labels: res.disasterLabels,
 
             datasets: [{
-
                 label: "Disaster",
-
                 data: res.disasterData,
 
                 backgroundColor: "#ef4444",
-                borderRadius: 8,
-                barThickness: 40
 
+                borderRadius: 12,          // 🔥 smoother rounded
+                borderSkipped: false,      // 🔥 full rounded
+                barThickness: 50,          // 🔥 thicker bars
+
+                categoryPercentage: 0.5,   // 🔥 spacing between bars
+                barPercentage: 0.7         // 🔥 inner spacing
             }]
-
         },
 
         options: {
-
             responsive: true,
             maintainAspectRatio: false,
 
             plugins: {
                 legend: { display: false }
+            },
+
+            scales: {
+                x: {
+                    grid: { display: false } // remove vertical lines
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1,
+                        color: "#6b7280"
+                    },
+                    grid: {
+                        color: "#e5e7eb"
+                    }
+                }
             }
-
         }
-
     }
 );
 
