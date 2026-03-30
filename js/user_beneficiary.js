@@ -1,6 +1,6 @@
-// =============================
+
 // SAVE
-// =============================
+
 $("#saveBeneficiary").click(function () {
 
     let formData = $("#beneficiaryForm").serialize();
@@ -10,7 +10,7 @@ $("#saveBeneficiary").click(function () {
     let url = "../php/create/create_beneficiary.php";
 
 
-    // ================= EDIT MODE =================
+    // EDIT MODE 
 
     if (editId) {
 
@@ -21,7 +21,7 @@ $("#saveBeneficiary").click(function () {
     }
 
 
-    // ================= AJAX =================
+  
 
     $.ajax({
 
@@ -68,9 +68,9 @@ $("#saveBeneficiary").click(function () {
 });
 
 
-// =============================
+
 // Include Family Member
-// =============================
+
 
 
 
@@ -141,9 +141,9 @@ $(document).on("click", ".removeRow", function(){
 });
 
 
-// =============================
+
 // Assistance receive
-// =============================
+
 
 $("#addAidRow").click(function () {
 
@@ -205,9 +205,9 @@ $("#addAidRow").click(function () {
 
 
 
-// =============================
+
 // View
-// =============================
+
 
 $(document).on("click", ".view", function () {
 
@@ -218,9 +218,9 @@ $(document).on("click", ".view", function () {
 });
 
 
-// =============================
+
 // UPDATE
-// =============================
+
 
 $(document).on("click", ".edit", function () {
 
@@ -253,7 +253,7 @@ $(document).on("click", ".edit", function () {
             $("#beneficiaryForm").data("edit-id", b.id);
 
 
-            // ================= BENEFICIARY =================
+            //  BENEFICIARY 
 
             $("input[name=region]").val(b.region);
             $("input[name=province]").val(b.province);
@@ -310,13 +310,13 @@ $(document).on("click", ".edit", function () {
             $("input[name=date_registered]").val(b.date_registered);
 
 
-            // ================= CLEAR TABLES =================
+            // CLEAR TABLES 
 
             $("#familyTable tbody").html("");
             $("#aidTable tbody").html("");
 
 
-            // ================= FAMILY =================
+            // FAMILY 
 
             family.forEach(f => {
 
@@ -573,9 +573,9 @@ function loadBeneficiary(page = 1, search = "", barangay = "") {
             });
 
 
-            // ====================
+        
             // COUNT
-            // ====================
+         
 
             let start = (page - 1) * limit + 1;
             let end = start + res.data.length - 1;
@@ -672,9 +672,9 @@ function loadBeneficiary(page = 1, search = "", barangay = "") {
 }
 
 
-// =============================
+
 // CLICK PAGINATION
-// =============================
+
 
 $(document).on("click", ".page-link", function (e) {
 

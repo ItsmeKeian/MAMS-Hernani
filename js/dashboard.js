@@ -180,12 +180,12 @@ new Chart(
 
                 backgroundColor: "#ef4444",
 
-                borderRadius: 12,          // 🔥 smoother rounded
-                borderSkipped: false,      // 🔥 full rounded
-                barThickness: 50,          // 🔥 thicker bars
+                borderRadius: 12,          
+                borderSkipped: false,     
+                barThickness: 50,          
 
-                categoryPercentage: 0.5,   // 🔥 spacing between bars
-                barPercentage: 0.7         // 🔥 inner spacing
+                categoryPercentage: 0.5,   
+                barPercentage: 0.7         
             }]
         },
 
@@ -199,7 +199,7 @@ new Chart(
 
             scales: {
                 x: {
-                    grid: { display: false } // remove vertical lines
+                    grid: { display: false } 
                 },
                 y: {
                     beginAtZero: true,

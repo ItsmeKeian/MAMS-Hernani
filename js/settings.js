@@ -247,8 +247,8 @@ function loadBackupSize(){
 
     $.get("../php/settings/get_backup_size.php", function(data){
 
-        $("#backupSize").text(data);       // button
-        $("#backupSizeText").text(data);   // card
+        $("#backupSize").text(data);       
+        $("#backupSizeText").text(data);   
 
     });
 

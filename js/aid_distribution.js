@@ -30,9 +30,9 @@ function loadSummary(search, barangay, from, to) {
 
 }
 
-// =============================
+
 // TABLE + PAGINATION
-// =============================
+
 
 let currentPage = 1;
 let limit = 5;
@@ -95,9 +95,9 @@ function loadBeneficiary(page = 1, search = "", barangay = "", from = "", to = "
             }
 
 
-            // ====================
+      
             // ROWS
-            // ====================
+       
 
             $.each(res.data, function (i, b) {
 
@@ -165,9 +165,8 @@ function loadBeneficiary(page = 1, search = "", barangay = "", from = "", to = "
             });
 
 
-            // ====================
+        
             // COUNT
-            // ====================
 
             let start = (page - 1) * limit + 1;
             let end = start + res.data.length - 1;
@@ -177,9 +176,9 @@ function loadBeneficiary(page = 1, search = "", barangay = "", from = "", to = "
             );
 
 
-            // ====================
+       
             // PAGINATION SLIDING
-            // ====================
+    
 
             let totalPages = Math.ceil(res.total / limit);
 
@@ -264,9 +263,9 @@ function loadBeneficiary(page = 1, search = "", barangay = "", from = "", to = "
 }
 
 
-// =============================
+
 // CLICK PAGINATION
-// =============================
+
 
 $(document).on("click", ".page-link", function (e) {
 
@@ -386,7 +385,7 @@ $("#exportBtn").click(function(e){
 
     if(!url) return;
 
-    // loading
+ 
     Swal.fire({
         title: "Preparing Excel...",
         allowOutsideClick:false,
@@ -396,7 +395,7 @@ $("#exportBtn").click(function(e){
         }
     }).then(()=>{
 
-        // success state
+     
         Swal.fire({
             icon: "success",
             title: "Export ready",
@@ -404,7 +403,7 @@ $("#exportBtn").click(function(e){
             showConfirmButton:false
         }).then(()=>{
 
-            // start download after success
+      
             window.location.href = url;
 
         });
