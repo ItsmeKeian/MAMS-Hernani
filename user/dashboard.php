@@ -87,7 +87,7 @@ require "../php/user_only.php";
                     <div>
                         <h1 class="header-title mb-1">Dashboard</h1>
                         <p class="header-subtitle mb-0">
-                            Welcome back, Administrator.
+                            Welcome back, User Name.
                         </p>
                     </div>
 

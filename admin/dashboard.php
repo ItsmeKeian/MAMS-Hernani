@@ -1,6 +1,6 @@
 <?php
 require "../php/admin_only.php";
-require "../php/license_check.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
